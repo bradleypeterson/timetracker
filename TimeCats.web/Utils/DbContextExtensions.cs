@@ -1,12 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Org.BouncyCastle.Utilities.Collections;
-using TimeCats.Controllers;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeCats.Models;
 
 namespace TimeCats.Utils
