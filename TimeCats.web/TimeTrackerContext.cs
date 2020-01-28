@@ -1,18 +1,18 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using TimeCats.Models;
 using TimeCats.Utils;
 
 namespace TimeCats
 {
-    public class TimeTrackerContext : DbContext
+    public class TimeTrackerContext : IdentityDbContext<ApplicationUser>
     {
         // ORIGINAL TABLES
         public DbSet<Course> Courses { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<TimeCard> TimeCards { get; set; }
         
         // JOINING TABLES
@@ -30,11 +30,11 @@ namespace TimeCats
             
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder dbModelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            this.ConfigureRelationships(modelBuilder);
-            this.SeedData(modelBuilder);
+            base.OnModelCreating(dbModelBuilder);
+            this.ConfigureRelationships(dbModelBuilder);
+            this.SeedData(dbModelBuilder);
         }
     }
 }
