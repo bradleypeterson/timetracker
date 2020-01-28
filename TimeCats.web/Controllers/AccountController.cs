@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using TimeCats.Models;
 
 namespace TimeCats.Controllers
@@ -26,8 +27,10 @@ namespace TimeCats.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Register(ApplicationUser user)
+        public async Task<IActionResult> Register([FromBody] object userJson)
         {
+            var ujson = userJson.ToString();
+            var user = JsonConvert.DeserializeObject<ApplicationUser>(ujson);
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
             {
