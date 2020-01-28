@@ -17,6 +17,11 @@ namespace TimeCats
 
         public void AddUser(User user)
         {
+            var crypto = new CryptographyService();
+            var salt = crypto.GenerateSalt();
+            user.password = crypto.CalculateHash(salt, user.password);
+            user.Salt = salt;
+            user.isActive = true;
             _timeTrackerContext.Users.Add(user);
             _timeTrackerContext.SaveChanges();
         }
@@ -30,6 +35,14 @@ namespace TimeCats
         public ICollection<Dashboard> GetDashboardsForUser()
         {
             throw new NotImplementedException();
+        }
+
+        public int AddCourse(Course course)
+        {
+            var c = _timeTrackerContext.Courses.Add(course);
+            _timeTrackerContext.SaveChanges();
+
+            return c.Entity.courseID;
         }
     }
 }
