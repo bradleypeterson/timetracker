@@ -39,6 +39,17 @@ namespace TimeCats
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "";
+                options.AccessDeniedPath = "";
+                options.SlidingExpiration = true;
+            });
             
             services.AddDbContext<TimeTrackerContext>(options =>
                 options.UseNpgsql(Configuration["ConnectionString:TimeTrackerDB"]));
@@ -59,8 +70,9 @@ namespace TimeCats
 
             app.UseStaticFiles();
             app.UseSession();
+            
             app.UseAuthentication();
-
+            app.UseAuthorization();
 
             app.UseMvc(routes =>
             {
