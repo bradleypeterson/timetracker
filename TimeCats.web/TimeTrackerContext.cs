@@ -9,14 +9,20 @@ namespace TimeCats
     {
         // ORIGINAL TABLES
         public DbSet<Course> Courses { get; set; }
+        
         public DbSet<Project> Projects { get; set; }
+        
         public DbSet<Group> Groups { get; set; }
-        public DbSet<User> Users { get; set; }
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        
         public DbSet<TimeCard> TimeCards { get; set; }
         
         // JOINING TABLES
         public DbSet<UserCourse> UserCourses { get; set; }
+        
         public DbSet<UserGroup> UserGroups { get; set; }
 
         // public DbSet<Eval> Evals { get; set; }

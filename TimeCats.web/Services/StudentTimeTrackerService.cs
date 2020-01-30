@@ -15,23 +15,6 @@ namespace TimeCats
             _timeTrackerContext = studentCtx;
         }
 
-        public void AddUser(User user)
-        {
-            var crypto = new CryptographyService();
-            var salt = crypto.GenerateSalt();
-            user.password = crypto.CalculateHash(salt, user.password);
-            user.Salt = salt;
-            user.isActive = true;
-            _timeTrackerContext.Users.Add(user);
-            _timeTrackerContext.SaveChanges();
-        }
-
-        public User GetUserByUsername(string username)
-        {
-            var user = _timeTrackerContext.Users.FirstOrDefault(u => u.username.ToLower().Equals(username.ToLower()));
-            return user;
-        }
-
         public ICollection<Dashboard> GetDashboardsForUser()
         {
             throw new NotImplementedException();
