@@ -2,22 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using TimeCats.Session;
 using TimeCats.Models;
+using TimeCats.Services;
 
 namespace TimeCats.Controllers
 {
     public class HomeController : Controller
     {
         private readonly StudentTimeTrackerService _timeTrackerService;
+        private readonly CourseService _courseService;
 
         public HomeController(IServiceProvider serviceProvider)
         {
             _timeTrackerService = serviceProvider.GetRequiredService<StudentTimeTrackerService>();
+            _courseService = serviceProvider.GetRequiredService<CourseService>();
         }
         
         public IActionResult Error()
@@ -226,22 +230,23 @@ namespace TimeCats.Controllers
         public IActionResult AddCourse([FromBody] object json)
         {
             var JsonString = json.ToString();
-
-            //TODO: Umm what? How can a user be both admin and 'I'
+            
             if (GetUserType() == 'I' || IsAdmin())
             {
-                var courseId = _timeTrackerService.AddCourse(new Course()
+                var course = _courseService.AddCourse(new Course()
                 {
-                    instructorID = GetUserID(),
                     courseName = "New Course",
+                    InstructorId = 2,
                     isActive = true,
                     description = ""
                 });
-
-                if (courseId > 0) return Ok(courseId);
-                return StatusCode(500); //Query Error
+    
+                if (course.courseID > 0)
+                    return Ok(course.courseID);
+                else
+                    return StatusCode(500);
             }
-
+            
             return Unauthorized();
         }
 
@@ -576,7 +581,7 @@ namespace TimeCats.Controllers
             var JsonString = json.ToString();
             var course = JsonConvert.DeserializeObject<Course>(JsonString);
 
-            var retreivedCourse = DBHelper.GetCourse(course.courseID);
+            var retreivedCourse = _courseService.GetCourse(course.courseID);
 
             return Ok(retreivedCourse);
         }
@@ -588,7 +593,7 @@ namespace TimeCats.Controllers
         [HttpGet]
         public IActionResult GetCourses()
         {
-            var allCourses = DBHelper.GetCourses();
+            var allCourses = _courseService.GetCourses();
             return Ok(allCourses);
         }
 
@@ -599,7 +604,7 @@ namespace TimeCats.Controllers
         [HttpPost]
         public IActionResult GetInstructorCourses()
         {
-            var allCourses = DBHelper.GetCourses();
+            var allCourses = _courseService.GetCourses();
             var userCourses = new List<Course>();
 
             foreach (var c in allCourses)
@@ -849,25 +854,20 @@ namespace TimeCats.Controllers
             var loginUser = JsonConvert.DeserializeObject<User>(JsonString);
 
             //Check database for User and create a session
-            var user = _timeTrackerService.GetUserWithPasswordHash(loginUser.username, GenerateHash(loginUser.password));
+            var user = _timeTrackerService.GetUserByUsername(loginUser.username);
+            var crypto = new CryptographyService();
 
-            //return Unauthorized (401) if the username or password is wrong
-            if (user == null)
+            if (crypto.Verify(user.password, user.Salt, loginUser.password))
             {
-                return Unauthorized();
-            }
-
-            //return Forbidden (403) if the user's account isn't active
-            if (!user.isActive) return StatusCode(403);
-
-            if (loginUser.username.ToLower() == user.username)
-            {
+                if (!user.isActive) return StatusCode(403); //return Forbidden (403) if the user's account isn't active
+                
                 // We found a user! Send them to the Dashboard and save their Session
                 HttpContext.Session.SetObjectAsJson("user", user);
                 return Ok();
             }
 
-            return null;
+            //return Unauthorized (401) if the username or password is wrong
+            return Unauthorized();
         }
 
         /// <summary>
@@ -895,8 +895,7 @@ namespace TimeCats.Controllers
         {
             var JsonString = json.ToString();
             var user = JsonConvert.DeserializeObject<User>(JsonString);
-            user.password = GenerateHash(user.password);
-            
+
             _timeTrackerService.AddUser(user);
 
             //Store Session information for this user using Username
@@ -1129,7 +1128,7 @@ namespace TimeCats.Controllers
 
             if (IsAdmin() || GetUserID() == user.userID)
             {
-                var courses = DBHelper.GetCoursesForInstructor(user.userID);
+                var courses = _courseService.GetCoursesByUser(user);
                 return Ok(courses);
             }
 
