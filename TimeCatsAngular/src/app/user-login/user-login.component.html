@@ -1,0 +1,10 @@
+<ng-form [formGroup]="loginForm" (ngSubmit)="attemptLogin()">
+  <mat-form-field [formControl]="loginForm['username']">
+  </mat-form-field>
+
+  <mat-form-field [formControl]="loginForm['username']">
+    <mat-error *ngIf="loginForm"></mat-error>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="!loginForm.valid">Login</button>
+</ng-form>
