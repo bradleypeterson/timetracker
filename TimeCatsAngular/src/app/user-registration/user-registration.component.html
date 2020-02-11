@@ -1,0 +1,28 @@
+<div class="registerContainer">
+  <mat-card class="registerCard">
+    <mat-card-content>
+      <h1>Register</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="attemptRegister()">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Ex. SteveW"/>
+          <mat-error *ngIf="usernameHasError()">Username is required.</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput/>
+          <mat-error *ngIf="passwordFirstHasError()"></mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput/>
+          <mat-error *ngIf="passwordSecondHasError()"></mat-error>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
