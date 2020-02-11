@@ -11,9 +11,9 @@ export class UserRegistrationComponent implements OnInit {
 
   constructor() {
     this.registerForm = new FormGroup({
-      username: new FormControl("", [Validators.required]),
-      passwordFirst: new FormControl("", [Validators.required]),
-      passwordSecond: new FormControl("", [Validators.required])
+      username: new FormControl('', [Validators.required]),
+      passwordFirst: new FormControl('', [Validators.required]),
+      passwordSecond: new FormControl('', [Validators.required])
     });
   }
 
