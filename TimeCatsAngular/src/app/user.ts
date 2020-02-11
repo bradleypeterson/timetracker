@@ -6,4 +6,5 @@ export interface User {
   password: string;
   type: any;
   isActive: boolean;
+  token?: string;
 }
