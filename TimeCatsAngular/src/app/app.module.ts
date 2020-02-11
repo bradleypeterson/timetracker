@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material';
-import { MatButtonModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
