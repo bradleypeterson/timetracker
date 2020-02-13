@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "TimeCatsAngular"
+  "defaultProject": "TimeCatsAngular",
+  "cli": {
+    "analytics": "101eaeb5-6c9f-4ec4-8a03-189435ca5887"
+  }
 }
