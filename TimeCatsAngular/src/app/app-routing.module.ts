@@ -1,12 +1,12 @@
 import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {UserLoginComponent} from "./user-login/user-login.component";
-import {UserRegistrationComponent} from "./user-registration/user-registration.component";
-
+import {HomeComponent} from "./home/home.component";
+import {ErrorComponent} from "./error/error.component";
 
 const routes: Routes = [
-  {path: "", component: UserLoginComponent},
-  {path: "register", component: UserRegistrationComponent}
+  { path: "", component: HomeComponent },
+  { path: "auth", loadChildren: () => import("./authentication/authentication.module").then(m => m.AuthenticationModule) },
+  { path: "**", component: ErrorComponent }
 ];
 
 @NgModule({
