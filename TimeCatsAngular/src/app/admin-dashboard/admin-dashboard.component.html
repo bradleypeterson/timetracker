@@ -1,1 +1,6 @@
-<p>admin-dashboard works!</p>
+<div>
+  <h2>Courses</h2>
+  <div *ngFor="let course of courses | async">
+    <p>Course Name: {{course.courseName}}</p>
+  </div>
+</div>
