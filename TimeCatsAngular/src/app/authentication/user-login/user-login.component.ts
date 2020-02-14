@@ -37,6 +37,6 @@ export class UserLoginComponent implements OnInit {
   }
 
   public passwordHasError(): boolean {
-    return this.loginForm.controls.password.valid;
+    return this.loginForm.controls.password.hasError("required");
   }
 }
