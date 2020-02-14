@@ -13,7 +13,7 @@ export class AppComponent {
   }
 
   public isAuthed(): boolean {
-    return !!this.auth.currentUserValue;
+    return this.auth.isUserAuthenticated();
   }
 
   public signOut(): void {

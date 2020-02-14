@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthenticatedRouteGuardService} from "./authenticated-route-guard.service";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     MatButtonModule,
     HttpClientModule
+  ],
+  providers: [
+    AuthenticatedRouteGuardService
   ]
 })
 export class AuthenticationModule { }

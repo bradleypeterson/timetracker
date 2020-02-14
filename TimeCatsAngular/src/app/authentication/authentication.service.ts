@@ -21,6 +21,10 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  public isUserAuthenticated(): boolean {
+    return !!this.currentUserValue;
+  }
+
   login(username: string, password: string) {
     const endpoint = `${environment.apiUrl}home/LoginUser`;
     return this.http.post<any>(endpoint, {username, password})
