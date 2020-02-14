@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AuthenticationService} from "./authentication/authentication.service";
 
 @Component({
   selector: "app-root",
@@ -7,4 +8,15 @@ import {Component} from "@angular/core";
 })
 export class AppComponent {
   title = "TimeCats";
+
+  constructor(private auth: AuthenticationService) {
+  }
+
+  public isAuthed(): boolean {
+    return !!this.auth.currentUserValue;
+  }
+
+  public signOut(): void {
+    this.auth.logout();
+  }
 }
