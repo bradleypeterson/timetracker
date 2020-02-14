@@ -1,1 +1,16 @@
-<p>user-dashboard works!</p>
+<div>
+  <div *ngIf="getUserType() === 'A'">
+    <!-- Display what an admin would see -->
+    <app-admin-dashboard></app-admin-dashboard>
+  </div>
+
+  <div *ngIf="getUserType() === 'I'">
+    <!-- Display what an instructor would see -->
+    <app-instructor-dashboard></app-instructor-dashboard>
+  </div>
+
+  <div *ngIf="getUserType() === 'S'">
+    <!-- Display what a student would see -->
+    <app-student-dashboard></app-student-dashboard>
+  </div>
+</div>

@@ -11,6 +11,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import {AuthenticationModule} from "./authentication/authentication.module";
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import {AuthenticationModule} from "./authentication/authentication.module";
     HomeComponent,
     ErrorComponent,
     UserDashboardComponent,
+    AdminDashboardComponent,
+    InstructorDashboardComponent,
+    StudentDashboardComponent,
   ],
   imports: [
     BrowserModule,
