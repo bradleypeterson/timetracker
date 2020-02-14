@@ -1,5 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthenticationService} from "../authentication.service";
+import {Router} from "@angular/router";
+import {User} from "../user";
 
 @Component({
   selector: "app-user-login",
@@ -9,10 +12,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class UserLoginComponent implements OnInit {
   public loginForm: FormGroup;
 
-  constructor() {
+  constructor(private auth: AuthenticationService, private router: Router) {
     this.loginForm = new FormGroup({
-      username: new FormControl(String, [Validators.required]),
-      password: new FormControl(String, [Validators.required])
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
     });
   }
 
@@ -20,8 +23,13 @@ export class UserLoginComponent implements OnInit {
   }
 
   public attemptLogin(): void {
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.get("username"));
+    const username = this.loginForm.get("username").value;
+    const password = this.loginForm.get("password").value;
+    this.auth.login(username, password).subscribe((user: User) => {
+      if (user.userID) {
+        this.router.navigate(['/auth/register']);
+      }
+    });
   }
 
   public usernameHasError(): boolean {

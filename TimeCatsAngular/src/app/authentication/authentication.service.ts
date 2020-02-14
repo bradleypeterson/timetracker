@@ -1,19 +1,18 @@
-import {Injectable} from "@angular/core";
-import {User} from "./user";
+import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {User} from "./user";
+import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
-// @ts-ignore
-import {environment} from "@environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("currentUser")));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -23,7 +22,8 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.httpClient.post<any>(`${environment.apiUrl}/users/authenticate`, {username, password})
+    const endpoint = `${environment.apiUrl}home/LoginUser`;
+    return this.http.post<any>(endpoint, {username, password})
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem("currentUser", JSON.stringify(user));

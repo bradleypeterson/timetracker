@@ -5,13 +5,13 @@
       <form [formGroup]="loginForm" (ngSubmit)="attemptLogin()">
         <mat-form-field>
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Ex. SteveW"/>
+          <input formControlName="username" matInput placeholder="Ex. SteveW"/>
           <mat-error *ngIf="usernameHasError()">Username is required.</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input type="password" matInput/>
+          <input formControlName="password" type="password" matInput/>
           <mat-error *ngIf="passwordHasError()"></mat-error>
         </mat-form-field>
         <br>

@@ -8,6 +8,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { HomeComponent } from "./home/home.component";
 import { ErrorComponent } from "./error/error.component";
 import {MatIconModule} from "@angular/material/icon";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {MatIconModule} from "@angular/material/icon";
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
