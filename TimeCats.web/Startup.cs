@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TimeCats.Services;
@@ -10,6 +11,8 @@ namespace TimeCats
 {
     public class Startup
     {
+        private readonly string LocalHostOrigins = "_localhostOrigin";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,6 +23,11 @@ namespace TimeCats
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => { 
+                options.AddPolicy(LocalHostOrigins, builder => {
+                    builder.AllowAnyOrigin().AllowAnyHeader();
+                }); 
+            });
             services.AddDbContext<TimeTrackerContext>(options =>
                 options.UseNpgsql(Configuration["ConnectionString:TimeTrackerDB"]));
             services.AddMvc(options => { options.EnableEndpointRouting = false; });
@@ -39,9 +47,10 @@ namespace TimeCats
             else
                 app.UseExceptionHandler("/Home/Error");
 
+            app.UseCors(LocalHostOrigins);
+            
             app.UseStaticFiles();
             app.UseSession();
-
 
             app.UseMvc(routes =>
             {

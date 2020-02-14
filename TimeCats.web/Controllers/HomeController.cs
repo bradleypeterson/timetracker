@@ -896,7 +896,9 @@ namespace TimeCats.Controllers
                 
                 // We found a user! Send them to the Dashboard and save their Session
                 HttpContext.Session.SetObjectAsJson("user", user);
-                return Ok();
+                user.password = null;
+                user.Salt = null;
+                return Ok(user);
             }
 
             //return Unauthorized (401) if the username or password is wrong
