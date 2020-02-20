@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
 
-import { AuthenticationRoutingModule } from "./authentication-routing.module";
+import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {UserLoginComponent} from "./user-login/user-login.component";
 import {UserRegistrationComponent} from "./user-registration/user-registration.component";
 import {MatCardModule} from "@angular/material/card";
@@ -29,4 +29,5 @@ import {AuthenticatedRouteGuardService} from "./authenticated-route-guard.servic
     AuthenticatedRouteGuardService
   ]
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {
+}

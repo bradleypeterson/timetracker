@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Course} from "../../course";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  selector: "app-admin-dashboard",
+  templateUrl: "./admin-dashboard.component.html",
+  styleUrls: ["./admin-dashboard.component.scss"]
 })
 export class AdminDashboardComponent implements OnInit {
   public courses: BehaviorSubject<Course[]>;
