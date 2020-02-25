@@ -3,6 +3,7 @@ import {Course} from "../../course";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -15,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.courses = new BehaviorSubject<Course[]>([]);
-    this.displayedColumns = ['courseID', 'courseName', 'description'];
+    this.displayedColumns = ["courseID", "courseName", "description"];
   }
 
   ngOnInit(): void {

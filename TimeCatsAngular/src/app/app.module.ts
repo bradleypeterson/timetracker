@@ -16,6 +16,7 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import {MatTableModule} from "@angular/material/table";
 import { ContentSectionComponent } from './content-section/content-section.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,16 +29,17 @@ import { ContentSectionComponent } from './content-section/content-section.compo
     StudentDashboardComponent,
     ContentSectionComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    HttpClientModule,
-    AuthenticationModule,
-    MatTableModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        HttpClientModule,
+        AuthenticationModule,
+        MatTableModule,
+        SharedModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
