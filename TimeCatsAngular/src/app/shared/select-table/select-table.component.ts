@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {DataSource, SelectionModel} from "@angular/cdk/collections";
+import {SelectionModel} from "@angular/cdk/collections";
 import {BehaviorSubject} from "rxjs";
 import {Course} from "../../../course";
-import {MatTableDataSource} from "@angular/material/table";
-import {CdkTableModule} from "@angular/cdk/table";
 
 @Component({
   selector: "app-select-table",
@@ -18,7 +16,9 @@ export class SelectTableComponent<T> implements OnInit {
 
   selection = new SelectionModel<Course>(this.allowMultiSelect, this.initialSelection);
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 }

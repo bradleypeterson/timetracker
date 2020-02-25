@@ -3,7 +3,6 @@ import {Course} from "../../course";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
-import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: "app-admin-dashboard",

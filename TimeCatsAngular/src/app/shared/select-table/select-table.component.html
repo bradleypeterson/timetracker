@@ -1,19 +1,19 @@
 <mat-table [dataSource]="dataSource | async" class="mat-elevation-z8">
   <!--    Course Id-->
   <ng-container matColumnDef="courseID">
-    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.courseID}}</mat-cell>
   </ng-container>
 
   <!--    Course Name-->
   <ng-container matColumnDef="courseName">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.courseName}}</mat-cell>
   </ng-container>
 
   <!--    Course Description-->
   <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
   </ng-container>
 
