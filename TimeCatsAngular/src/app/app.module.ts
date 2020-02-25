@@ -14,6 +14,8 @@ import {AuthenticationModule} from "./authentication/authentication.module";
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import {MatTableModule} from "@angular/material/table";
+import { ContentSectionComponent } from './content-section/content-section.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     AdminDashboardComponent,
     InstructorDashboardComponent,
     StudentDashboardComponent,
+    ContentSectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     MatToolbarModule,
     MatIconModule,
     HttpClientModule,
-    AuthenticationModule
+    AuthenticationModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
