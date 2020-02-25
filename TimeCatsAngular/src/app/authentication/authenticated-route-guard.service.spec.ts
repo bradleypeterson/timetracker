@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import { AuthenticatedRouteGuardService } from './authenticated-route-guard.service';
+import {AuthenticatedRouteGuardService} from "./authenticated-route-guard.service";
 
-describe('AuthenticatedRouteGuardService', () => {
+describe("AuthenticatedRouteGuardService", () => {
   let service: AuthenticatedRouteGuardService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('AuthenticatedRouteGuardService', () => {
     service = TestBed.inject(AuthenticatedRouteGuardService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

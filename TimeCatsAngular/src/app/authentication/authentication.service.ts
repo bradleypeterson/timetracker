@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable} from "rxjs";
 import {User} from "./user";
 import {environment} from "../../environments/environment";
@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;

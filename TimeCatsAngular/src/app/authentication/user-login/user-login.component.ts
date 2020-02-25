@@ -27,7 +27,7 @@ export class UserLoginComponent implements OnInit {
     const password = this.loginForm.get("password").value;
     this.auth.login(username, password).subscribe((user: User) => {
       if (user.userID) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(["/dashboard"]);
       }
     });
   }
