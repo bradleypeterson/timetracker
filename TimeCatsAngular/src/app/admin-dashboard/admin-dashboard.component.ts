@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Course} from "../../course";
+import {Course} from "../course";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BehaviorSubject} from "rxjs";
@@ -15,7 +15,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.courses = new BehaviorSubject<Course[]>([]);
-    this.displayedColumns = ["courseID", "courseName", "description"];
+    this.displayedColumns = ["select", "courseID", "courseName", "description"];
   }
 
   ngOnInit(): void {

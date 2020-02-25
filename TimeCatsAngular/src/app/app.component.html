@@ -4,8 +4,25 @@
       <span class="linkItem" routerLink="">{{title}}</span>
       <span class="linkItem" routerLink="dashboard">Dashboard</span>
       <span class="fill-remaining-space"></span>
-      <span *ngIf="!isAuthed()" routerLink="/auth/login">Login</span>
-      <span *ngIf="isAuthed()" routerLink="/auth/login" (click)="signOut()">Logout</span>
+      <span>
+          <button *ngIf="!isAuthed()"
+                  aria-label="icon-button with login icon"
+                  color="primary"
+                  mat-flat-button
+                  routerLink="auth/login">
+              <span>Login</span>
+              <mat-icon>exit_to_app</mat-icon>
+        </button>
+
+        <button *ngIf="isAuthed()"
+                aria-label="icon-button with login icon"
+                color="primary"
+                mat-flat-button
+                (click)="signOut()">
+              <span>Logout</span>
+              <mat-icon>input</mat-icon>
+          </button>
+      </span>
     </mat-toolbar-row>
   </mat-toolbar>
 

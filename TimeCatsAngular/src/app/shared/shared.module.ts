@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {SelectTableComponent} from "./select-table/select-table.component";
 import {MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -9,10 +10,11 @@ import {MatTableModule} from "@angular/material/table";
   exports: [
     SelectTableComponent
   ],
-  imports: [
-    CommonModule,
-    MatTableModule
-  ]
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatCheckboxModule
+    ]
 })
 export class SharedModule {
 }

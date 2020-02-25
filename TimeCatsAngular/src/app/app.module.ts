@@ -17,6 +17,7 @@ import {StudentDashboardComponent} from "./student-dashboard/student-dashboard.c
 import {MatTableModule} from "@angular/material/table";
 import {ContentSectionComponent} from "./content-section/content-section.component";
 import {SharedModule} from "./shared/shared.module";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {SharedModule} from "./shared/shared.module";
     HttpClientModule,
     AuthenticationModule,
     MatTableModule,
-    SharedModule
+    SharedModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,21 @@
 <mat-table [dataSource]="dataSource | async" class="mat-elevation-z8">
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxAriaLabel()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxAriaLabel()">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
   <!--    Course Id-->
   <ng-container matColumnDef="courseID">
     <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
