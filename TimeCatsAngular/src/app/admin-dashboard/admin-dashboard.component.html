@@ -1,25 +1,8 @@
 <div>
   <h1>Courses</h1>
-  <mat-table [dataSource]="courses | async" class="mat-elevation-z8">
-    <!--    Course Id-->
-    <ng-container matColumnDef="courseID">
-      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.courseID}}</mat-cell>
-    </ng-container>
-
-    <!--    Course Name-->
-    <ng-container matColumnDef="courseName">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.courseName}}</mat-cell>
-    </ng-container>
-
-    <!--    Course Description-->
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <app-select-table [allowMultiSelect]="false"
+                    [initialSelection]="[]"
+                    [displayedColumns]="displayedColumns"
+                    [dataSource]="courses">
+  </app-select-table>
 </div>

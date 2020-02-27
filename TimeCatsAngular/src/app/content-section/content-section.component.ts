@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
-  selector: 'app-content-section',
-  templateUrl: './content-section.component.html',
-  styleUrls: ['./content-section.component.scss'],
+  selector: "app-content-section",
+  templateUrl: "./content-section.component.html",
+  styleUrls: ["./content-section.component.scss"],
   animations: [
     trigger("chevronState", [
       state("closed", style({
@@ -99,7 +99,8 @@ export class ContentSectionComponent implements OnInit {
     // public color?: string,
     // public href?: string,
     // public disabled = false
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
