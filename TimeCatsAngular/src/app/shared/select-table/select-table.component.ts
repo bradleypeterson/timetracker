@@ -15,12 +15,15 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
   @Input() displayedColumns: string[];
   @Input() dataSource: BehaviorSubject<T[]>;
 
-  selection = new SelectionModel<T>(this.allowMultiSelect, this.initialSelection);
+  public columns: string[];
+  public selection = new SelectionModel<T>(this.allowMultiSelect, this.initialSelection);
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.columns = this.displayedColumns.slice(this.displayedColumns.length);
+    this.displayedColumns.splice(0, 0, "select");
   }
 
   isAllSelected(): boolean {

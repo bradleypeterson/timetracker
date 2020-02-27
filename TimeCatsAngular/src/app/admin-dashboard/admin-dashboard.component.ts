@@ -15,7 +15,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.courses = new BehaviorSubject<Course[]>([]);
-    this.displayedColumns = ["select", "courseID", "courseName", "description"];
+    this.displayedColumns = ["courseID", "courseName", "description"];
   }
 
   ngOnInit(): void {

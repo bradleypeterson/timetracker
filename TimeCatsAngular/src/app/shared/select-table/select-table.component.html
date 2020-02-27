@@ -1,3 +1,5 @@
+<p *ngFor="let column of columns">{{column}}</p>
+
 <mat-table [dataSource]="dataSource | async" class="mat-elevation-z8">
   <ng-container matColumnDef="select">
     <mat-header-cell *matHeaderCellDef>
@@ -16,22 +18,26 @@
     </mat-cell>
   </ng-container>
 
-  <!--    Course Id-->
+<!--  <ng-container *ngFor="let column of columns" [matColumnDef]="column">-->
+<!--    <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let row">{{row[column]}}</mat-cell>-->
+<!--  </ng-container>-->
+
   <ng-container matColumnDef="courseID">
-    <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.courseID}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row["courseID"]}}</mat-cell>
   </ng-container>
 
   <!--    Course Name-->
   <ng-container matColumnDef="courseName">
     <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.courseName}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row["courseName"]}}</mat-cell>
   </ng-container>
 
   <!--    Course Description-->
   <ng-container matColumnDef="description">
     <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
+    <mat-cell *matCellDef="let row">{{row["description"]}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
