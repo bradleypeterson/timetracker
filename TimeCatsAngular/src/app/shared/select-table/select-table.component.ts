@@ -22,8 +22,10 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
   }
 
   ngOnInit(): void {
-    this.columns = this.displayedColumns.slice(this.displayedColumns.length);
-    this.displayedColumns.splice(0, 0, "select");
+    this.columns = this.displayedColumns.slice();
+    if (this.allowMultiSelect) {
+      this.displayedColumns.splice(0, 0, "select");
+    }
   }
 
   isAllSelected(): boolean {
