@@ -9,25 +9,18 @@ import {HomeComponent} from "./home/home.component";
 import {ErrorComponent} from "./error/error.component";
 import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
-import {UserDashboardComponent} from "./user-dashboard/user-dashboard.component";
 import {AuthenticationModule} from "./authentication/authentication.module";
-import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
-import {InstructorDashboardComponent} from "./instructor-dashboard/instructor-dashboard.component";
-import {StudentDashboardComponent} from "./student-dashboard/student-dashboard.component";
 import {MatTableModule} from "@angular/material/table";
 import {ContentSectionComponent} from "./content-section/content-section.component";
 import {SharedModule} from "./shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    UserDashboardComponent,
-    AdminDashboardComponent,
-    InstructorDashboardComponent,
-    StudentDashboardComponent,
     ContentSectionComponent,
   ],
   imports: [
@@ -38,6 +31,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     HttpClientModule,
     AuthenticationModule,
+    DashboardModule,
     MatTableModule,
     SharedModule,
     MatButtonModule

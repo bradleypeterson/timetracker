@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {Course} from "../course";
+import {Course} from "../../course";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {BehaviorSubject} from "rxjs";
-import {User} from '../authentication/user';
+import {User} from "../../authentication/user";
 
 @Component({
   selector: "app-admin-dashboard",
