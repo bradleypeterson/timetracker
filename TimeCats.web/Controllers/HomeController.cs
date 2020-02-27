@@ -231,6 +231,12 @@ namespace TimeCats.Controllers
 
         #region Endpoints
 
+        [HttpGet]
+        public IActionResult GetInstructors()
+        {
+            return Ok(_userService.GetInstructors());
+        }
+
         /// <summary>
         ///     Add a course. Returns the course ID
         /// </summary>
