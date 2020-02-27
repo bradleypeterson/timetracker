@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { SelectTableComponent } from './select-table.component';
+import {SelectTableComponent} from "./select-table.component";
 
-describe('SelectTableComponent', () => {
+describe("SelectTableComponent", () => {
   let component: SelectTableComponent;
   let fixture: ComponentFixture<SelectTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectTableComponent ]
+      declarations: [SelectTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('SelectTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

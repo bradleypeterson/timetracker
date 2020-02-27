@@ -1,20 +1,24 @@
 <mat-table [dataSource]="dataSource | async" class="mat-elevation-z8">
-  <!--    Course Id-->
-  <ng-container matColumnDef="courseID">
-    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.courseID}}</mat-cell>
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxAriaLabel()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxAriaLabel()">
+      </mat-checkbox>
+    </mat-cell>
   </ng-container>
 
-  <!--    Course Name-->
-  <ng-container matColumnDef="courseName">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.courseName}}</mat-cell>
-  </ng-container>
-
-  <!--    Course Description-->
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
+  <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+    <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row[column]}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
