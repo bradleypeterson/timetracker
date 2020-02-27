@@ -14,6 +14,12 @@ namespace TimeCats.Services
             _context = context;
         }
 
+        public IEnumerable<User> GetInstructors()
+        {
+            var instructors = _context.Users.Where(u => u.type.Equals('I')).ToList();
+            return instructors;
+        }
+
         public IEnumerable<User> GetUsersForCourse(int courseId)
         {
             var users = _context.UserCourses
