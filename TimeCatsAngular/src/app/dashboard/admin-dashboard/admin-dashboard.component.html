@@ -1,13 +1,19 @@
 <div>
-  <h1>Courses</h1>
-  <app-select-table [allowMultiSelect]="false"
-                    [displayedColumns]="courseDisplayedColumns"
-                    [dataSource]="courses">
-  </app-select-table>
+  <app-content-section [title]="'Courses'"
+                       [collapsible]="true"
+                       [noButtons]="true">
+    <app-select-table [allowMultiSelect]="false"
+                      [displayedColumns]="courseDisplayedColumns"
+                      [dataSource]="courses">
+    </app-select-table>
+  </app-content-section>
 
-  <h1>Instructors</h1>
-  <app-select-table [allowMultiSelect]="false"
-                    [displayedColumns]="instructorDisplayedColumns"
-                    [dataSource]="instructors">
-  </app-select-table>
+  <app-content-section [title]="'Instructors'"
+                       [noButtons]="true"
+                       [collapsible]="true">
+    <app-select-table [allowMultiSelect]="false"
+                      [displayedColumns]="instructorDisplayedColumns"
+                      [dataSource]="instructors">
+    </app-select-table>
+  </app-content-section>
 </div>

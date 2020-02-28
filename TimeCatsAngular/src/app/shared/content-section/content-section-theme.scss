@@ -1,0 +1,47 @@
+@import "~@angular/material/theming";
+
+@mixin content-section-theme($theme) {
+  // Extract the palettes you need from the theme definition
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  // Define any styles affected by the theme
+  div.section-header {
+    // Use mat-color to extract individual colors from a palette.
+    background-color: mat-color($primary);
+
+    &>mat-icon {
+      color: mat-color($accent);
+    }
+
+    .collapse-chevron {
+      color: mat-color($accent);
+    }
+  }
+
+  div.section-content {
+    background-color: mat-color($mat-grey);
+  }
+}
+
+@mixin content-section-typography($config) {
+  div.section-header {
+    font: {
+      family: mat-font-family($config, body-1);
+      size: mat-font-size($config, body-1);
+      weight: mat-font-weight($config, body-1);
+    }
+
+    h3 {
+      color: mat-color($grey);
+    }
+  }
+
+  div.section-content {
+    font: {
+      family: mat-font-family($config, body-1);
+      size: mat-font-size($config, body-1);
+      weight: mat-font-weight($config, body-1);
+    }
+  }
+}

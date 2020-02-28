@@ -1,0 +1,16 @@
+<div class="section-header" [class.compact]="compact">
+  <button type="button"
+          mat-icon-button
+          class="collapse-chevron"
+          (click)="toggleState()"
+          *ngIf="isCollapsible()"
+          [@chevronState]="state">
+    <mat-icon>expand_more</mat-icon>
+  </button>
+  <mat-icon [svgIcon]="svgIcon" *ngIf="svgIcon"></mat-icon>
+  <h3>{{title}}</h3>
+  <span class="spacer"></span>
+</div>
+<div class="section-content" [@state]="state">
+  <ng-content></ng-content>
+</div>

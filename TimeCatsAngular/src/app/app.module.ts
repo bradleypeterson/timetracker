@@ -11,7 +11,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthenticationModule} from "./authentication/authentication.module";
 import {MatTableModule} from "@angular/material/table";
-import {ContentSectionComponent} from "./content-section/content-section.component";
 import {SharedModule} from "./shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
 import {DashboardModule} from "./dashboard/dashboard.module";
@@ -21,7 +20,6 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    ContentSectionComponent,
   ],
   imports: [
     BrowserModule,
