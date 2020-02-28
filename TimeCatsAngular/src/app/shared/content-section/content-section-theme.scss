@@ -5,6 +5,10 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
 
+  div.content-section {
+    padding: 20px;
+  }
+
   // Define any styles affected by the theme
   div.section-header {
     // Use mat-color to extract individual colors from a palette.

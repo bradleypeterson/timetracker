@@ -1,0 +1,10 @@
+<div>
+  <app-content-section [title]="'Courses'">
+    <app-select-table [allowMultiSelect]="false"
+                      [displayedColumns]="courseDisplayedColumns"
+                      [dataSource]="courses">
+    </app-select-table>
+  </app-content-section>
+</div>
+
+<button mat-fab color="accent" class="addButton"><mat-icon>add</mat-icon></button>

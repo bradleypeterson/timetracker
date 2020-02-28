@@ -19,6 +19,11 @@ const routes: Routes = [
     canActivate: [AuthenticatedRouteGuardService]
   },
   {
+    path: 'courses',
+    loadChildren: () => import('./course/course.module').then(m => m.CourseModule),
+    canActivate: [AuthenticatedRouteGuardService]
+  },
+  {
     path: "error",
     component: ErrorComponent
   },
