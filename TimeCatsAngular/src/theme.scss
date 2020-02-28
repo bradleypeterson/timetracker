@@ -1,8 +1,15 @@
 @import "~@angular/material/theming";
-//@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "./app/shared/content-section/content-section-theme";
 
-@include mat-core();
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+  $subheading-2: mat-typography-level(18px, 24px, 500)
+);
+@include content-section-typography($custom-typography);
+
+@include mat-core($custom-typography);
 
 $app-primary: mat-palette($mat-deep-purple);
 $app-accent: mat-palette($mat-amber);
@@ -10,10 +17,10 @@ $app-warn: mat-palette($mat-red);
 
 //$app-dark-theme: mat-dark-theme();
 $app-light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-light-theme);
 
+@include angular-material-theme($app-light-theme);
 @include content-section-theme($app-light-theme);
-//@include content-section-typography($app-light-theme);
+
 
 
 

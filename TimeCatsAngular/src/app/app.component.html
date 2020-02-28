@@ -1,7 +1,12 @@
 <div>
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span class="linkItem" routerLink="">{{title}}</span>
+      <span class="linkItem" routerLink="">
+        <img [src]="homeLogo"
+             class="homeLogo"
+             alt="Home Logo"
+             aria-label="Home Logo"/>
+      </span>
       <span class="linkItem" routerLink="dashboard">Dashboard</span>
       <span class="fill-remaining-space"></span>
       <span>
@@ -18,7 +23,8 @@
                 aria-label="icon-button with login icon"
                 color="primary"
                 mat-flat-button
-                (click)="signOut()">
+                (click)="signOut()"
+                routerLink="/auth/login">
               <span>Logout</span>
               <mat-icon>input</mat-icon>
           </button>

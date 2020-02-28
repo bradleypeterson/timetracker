@@ -8,6 +8,7 @@ import {AuthenticationService} from "./authentication/authentication.service";
 })
 export class AppComponent {
   title = "TimeCats";
+  homeLogo = "assets/logo.svg";
 
   constructor(private auth: AuthenticationService) {
   }

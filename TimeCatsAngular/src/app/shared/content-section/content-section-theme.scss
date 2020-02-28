@@ -8,6 +8,7 @@
   // Define any styles affected by the theme
   div.section-header {
     // Use mat-color to extract individual colors from a palette.
+    color: white;
     background-color: mat-color($primary);
 
     &>mat-icon {
@@ -27,13 +28,9 @@
 @mixin content-section-typography($config) {
   div.section-header {
     font: {
-      family: mat-font-family($config, body-1);
-      size: mat-font-size($config, body-1);
-      weight: mat-font-weight($config, body-1);
-    }
-
-    h3 {
-      color: mat-color($grey);
+      family: mat-font-family($config, subheading-2);
+      size: mat-font-size($config, subheading-2);
+      weight: mat-font-weight($config, subheading-2);
     }
   }
 
