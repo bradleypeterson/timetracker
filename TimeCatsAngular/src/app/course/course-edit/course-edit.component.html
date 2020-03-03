@@ -1,0 +1,33 @@
+<app-content-section [title]="contentSectionTitle">
+  <form formGroupName="courseEditForm">
+    <div class="outer">
+        <mat-form-field class="full-width-field courseId">
+          <mat-label>Course Id</mat-label>
+          <input matInput disabled [value]="getId()"/>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-field courseName">
+          <mat-label>Course Name</mat-label>
+          <input matInput [value]="getName()"/>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width-field">
+      <mat-label>Course Description</mat-label>
+      <textarea matInput placeholder="Ex. A course about..." [value]="getDescription()"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-field">
+      <mat-label>Instructor</mat-label>
+      <mat-select>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let instructor of getInstructors() | async"
+                    [value]="instructor.id">
+          {{instructor.firstName}} {{instructor.lastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Create</button>
+  </form>
+</app-content-section>

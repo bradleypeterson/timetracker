@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {CourseDetailComponent} from "./course-detail/course-detail.component";
 import {CourseComponent} from "./course/course.component";
+import {CourseEditComponent} from "./course-edit/course-edit.component";
 
 const routes: Routes = [
   {
@@ -12,7 +13,12 @@ const routes: Routes = [
   {
     path: "course/:id",
     component: CourseDetailComponent,
-  }];
+  },
+  {
+    path: "add",
+    component: CourseEditComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,0 +1,15 @@
+.full-width-field {
+  width: 100%;
+}
+
+.outer {
+  display: flex;
+
+  .courseId {
+    padding-right: 5px;
+  }
+
+  .courseName {
+    padding-left: 5px;
+  }
+}
