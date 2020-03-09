@@ -13,7 +13,7 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
   @Input() allowMultiSelect = false;
   @Input() initialSelection = [];
   @Input() displayedColumns: string[];
-  @Input() dataSource: BehaviorSubject<T[]>;
+  @Input() dataSource: T[];
 
   public columns: string[];
   public selection = new SelectionModel<T>(this.allowMultiSelect, this.initialSelection);
@@ -30,14 +30,14 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
 
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.getValue().length;
+    const numRows = this.dataSource.length;
     return numSelected === numRows;
   }
 
   masterToggle(): void {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.getValue().forEach((row) => this.selection.select(row));
+      this.dataSource.forEach((row) => this.selection.select(row));
   }
 
   checkboxAriaLabel(row?: T): string {

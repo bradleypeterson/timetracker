@@ -1,6 +1,6 @@
 <h1>Courses</h1>
 <app-select-table [allowMultiSelect]="false"
                   [displayedColumns]="displayedColumns"
-                  [dataSource]="courses">
+                  [dataSource]="courses | async">
 
 </app-select-table>
