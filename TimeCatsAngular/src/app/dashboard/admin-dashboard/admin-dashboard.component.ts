@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../../authentication/user";
+import {CourseService} from "../../core/course.service";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -16,7 +18,8 @@ export class AdminDashboardComponent implements OnInit {
   public instructors: BehaviorSubject<User[]>;
   public instructorDisplayedColumns: string[];
 
-  constructor(private http: HttpClient) {
+  constructor(private courseService: CourseService,
+              private userService: UserService) {
     this.courses = new BehaviorSubject<Course[]>([]);
     this.courseDisplayedColumns = ["courseID", "courseName", "description"];
     this.instructors = new BehaviorSubject<User[]>([]);
@@ -29,14 +32,14 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   public getCourses(): void {
-    this.http.get<Course[]>(`${environment.apiUrl}home/GetCourses`)
+    this.courseService.getCourses()
       .subscribe((courses) => {
         this.courses.next(courses);
       });
   }
 
   public getInstructors(): void {
-    this.http.get<User[]>(`${environment.apiUrl}home/GetInstructors`)
+    this.userService.getInstructors()
       .subscribe((users) => {
         this.instructors.next(users);
       });

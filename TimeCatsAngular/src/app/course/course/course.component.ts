@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Course} from "../../course";
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject} from "rxjs";
+import {CourseService} from "../../core/course.service";
 
 @Component({
   selector: 'app-course',
@@ -10,11 +8,10 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent implements OnInit {
-  public courses: BehaviorSubject<Course[]>;
+  public courses: Course[];
   public courseDisplayedColumns: string[];
 
-  constructor(private http: HttpClient) {
-    this.courses = new BehaviorSubject<Course[]>([]);
+  constructor(private courseService: CourseService) {
     this.courseDisplayedColumns = ["courseID", "courseName", "description"];
   }
 
@@ -22,10 +19,10 @@ export class CourseComponent implements OnInit {
     this.getCourses();
   }
 
-  public getCourses(): void {
-    this.http.get<Course[]>(`${environment.apiUrl}home/GetCourses`)
-      .subscribe((courses) => {
-        this.courses.next(courses);
+  private getCourses(): void {
+    this.courseService.getCourses()
+      .subscribe(courses => {
+        this.courses = courses;
       });
   }
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {SelectionModel} from "@angular/cdk/collections";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Course} from "../../course";
 import {Identifiable} from "../../identifiable";
 

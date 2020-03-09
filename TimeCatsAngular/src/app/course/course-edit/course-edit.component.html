@@ -1,5 +1,5 @@
 <app-content-section [title]="contentSectionTitle">
-  <form formGroupName="courseEditForm">
+  <form (submit)="createCourse()" formGroupName="courseEditForm">
     <div class="outer">
         <mat-form-field class="full-width-field courseId">
           <mat-label>Course Id</mat-label>

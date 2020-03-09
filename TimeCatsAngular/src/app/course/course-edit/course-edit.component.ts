@@ -4,6 +4,7 @@ import {User} from "../../authentication/user";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {CourseService} from "../../core/course.service";
 
 @Component({
   selector: 'app-course-edit',
@@ -14,7 +15,8 @@ export class CourseEditComponent implements OnInit {
   public contentSectionTitle = "Course Builder";
   public courseEditForm: FormGroup;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private courseService: CourseService) {
       this.courseEditForm = new FormGroup({
         id:             new FormControl(null),
         name:           new FormControl("New Course", [Validators.required]),
@@ -47,5 +49,9 @@ export class CourseEditComponent implements OnInit {
     });
 
     return output;
+  }
+
+  createCourse(): void {
+
   }
 }
