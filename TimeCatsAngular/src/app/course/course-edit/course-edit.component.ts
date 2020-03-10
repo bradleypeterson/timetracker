@@ -1,12 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../authentication/user";
-import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
 import {CourseService} from "../../core/course.service";
 import {Course} from "../../course";
-import {UserService} from '../../core/user.service';
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-course-edit",
@@ -19,13 +17,14 @@ export class CourseEditComponent implements OnInit {
 
   public instructors: Observable<User[]>;
 
-  constructor(private userService: UserService,
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService,
               private courseService: CourseService) {
       this.courseEditForm = new FormGroup({
         id:             new FormControl(null),
         name:           new FormControl("New Course", [Validators.required]),
         description:    new FormControl("", [Validators.required]),
-        instructor:     new FormControl(null, [Validators.required]),
+        instructor:     new FormControl(0, [Validators.required]),
         users:          new FormControl(Array(User))
     });
   }
@@ -54,5 +53,17 @@ export class CourseEditComponent implements OnInit {
     course.instructorId = this.courseEditForm.controls.instructor.value;
 
     this.courseService.addCourse(course);
+  }
+
+  courseNameHasError(): boolean {
+    return this.courseEditForm.controls.name.hasError("required");
+  }
+
+  courseDescriptionHasError(): boolean {
+    return this.courseEditForm.controls.description.hasError("required");
+  }
+
+  instructorHasError() {
+    return this.courseEditForm.controls.instructor.hasError("required");
   }
 }

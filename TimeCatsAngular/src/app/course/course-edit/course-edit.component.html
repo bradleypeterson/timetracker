@@ -1,32 +1,37 @@
 <app-content-section [title]="contentSectionTitle">
-  <form (submit)="createCourse()" formGroupName="courseEditForm">
+  <form (submit)="createCourse()" [formGroup]="courseEditForm">
     <div class="outer">
-        <mat-form-field class="full-width-field courseId">
-          <mat-label>Course Id</mat-label>
-          <input matInput disabled [value]="getId()"/>
-        </mat-form-field>
+      <mat-form-field class="full-width-field courseId">
+        <mat-label>Course Id</mat-label>
+        <input formControlName="id" matInput [disabled]="true" [value]="getId()"/>
+      </mat-form-field>
 
-        <mat-form-field class="full-width-field courseName">
+      <div class="full-width-field courseName">
+        <mat-form-field class="full-width-field">
           <mat-label>Course Name</mat-label>
-          <input matInput [value]="getName()"/>
+          <input formControlName="name" matInput [value]="getName()"/>
+          <mat-error *ngIf="courseNameHasError()">Course name is required.</mat-error>
         </mat-form-field>
+      </div>
     </div>
 
     <mat-form-field class="full-width-field">
       <mat-label>Course Description</mat-label>
-      <textarea matInput placeholder="Ex. A course about..." [value]="getDescription()"></textarea>
+      <textarea matInput formControlName="description" placeholder="Ex. A course about..." [value]="getDescription()"></textarea>
+      <mat-error *ngIf="courseDescriptionHasError()">Course description is required.</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width-field">
       <mat-label>Instructor</mat-label>
-      <mat-select>
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let instructor of instructors | async" [value]="instructor.id">
-          {{instructor.firstName}} {{instructor.lastName}}
+      <mat-select formControlName="instructor">
+        <mat-option [value]="0">None</mat-option>
+        <mat-option *ngFor="let instructor of instructors | async" [value]="instructor.userID">
+          {{instructor.userID}}: {{instructor.firstName}} {{instructor.lastName}}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="instructorHasError()">Instructor is required.</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Create</button>
+    <button mat-raised-button [disabled]="!courseEditForm.valid" color="primary">Create</button>
   </form>
 </app-content-section>

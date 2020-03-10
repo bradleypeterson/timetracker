@@ -18,6 +18,6 @@ export class CourseService {
   }
 
   public addCourse(course: Course): void {
-    this.http.post(this.addCourseEndpoint, course);
+    this.http.post(this.addCourseEndpoint, course).subscribe();
   }
 }
