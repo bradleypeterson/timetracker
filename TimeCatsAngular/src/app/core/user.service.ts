@@ -6,9 +6,9 @@ import {User} from "../authentication/user";
 import {catchError} from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class UserService implements OnInit {
+export class UserService {
   private allUsersEndpoint = `${environment.apiUrl}home/getUsers`;
   private allStudentsEndpoint = `${environment.apiUrl}home/getStudents`;
   private allInstructorsEndpoint = `${environment.apiUrl}home/GetInstructors`;
@@ -17,10 +17,6 @@ export class UserService implements OnInit {
 
   constructor(private http: HttpClient) {
     this.users = new BehaviorSubject<User[]>(new Array<User>());
-  }
-
-  ngOnInit(): void {
-    this.getUsers();
   }
 
   private getUsers(): Observable<User[]> {
@@ -50,7 +46,7 @@ export class UserService implements OnInit {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      //this.log(`${operation} failed: ${error.message}`);
+      // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result
       return of(result as T);

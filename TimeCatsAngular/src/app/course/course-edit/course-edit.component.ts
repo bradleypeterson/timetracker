@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../authentication/user";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {CourseService} from "../../core/course.service";
+import {Course} from "../../course";
+import {UserService} from '../../core/user.service';
 
 @Component({
-  selector: 'app-course-edit',
-  templateUrl: './course-edit.component.html',
-  styleUrls: ['./course-edit.component.scss']
+  selector: "app-course-edit",
+  templateUrl: "./course-edit.component.html",
+  styleUrls: ["./course-edit.component.scss"]
 })
 export class CourseEditComponent implements OnInit {
   public contentSectionTitle = "Course Builder";
   public courseEditForm: FormGroup;
 
-  constructor(private http: HttpClient,
+  public instructors: Observable<User[]>;
+
+  constructor(private userService: UserService,
               private courseService: CourseService) {
       this.courseEditForm = new FormGroup({
         id:             new FormControl(null),
@@ -27,6 +31,7 @@ export class CourseEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.instructors = this.userService.getInstructors();
   }
 
   getId(): string {
@@ -41,17 +46,13 @@ export class CourseEditComponent implements OnInit {
     return this.courseEditForm.controls.description.value;
   }
 
-  getInstructors(): Observable<User[]> {
-    let output = this.http.get<User[]>(`${environment.apiUrl}home/GetInstructors`);
-
-    output.subscribe((instructor) => {
-      console.log(instructor);
-    });
-
-    return output;
-  }
-
   createCourse(): void {
+    const course = new Course();
 
+    course.courseName = this.courseEditForm.controls.name.value;
+    course.description = this.courseEditForm.controls.description.value;
+    course.instructorId = this.courseEditForm.controls.instructor.value;
+
+    this.courseService.addCourse(course);
   }
 }

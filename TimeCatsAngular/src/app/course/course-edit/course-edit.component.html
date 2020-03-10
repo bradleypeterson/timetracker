@@ -21,8 +21,7 @@
       <mat-label>Instructor</mat-label>
       <mat-select>
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let instructor of getInstructors() | async"
-                    [value]="instructor.id">
+        <mat-option *ngFor="let instructor of instructors | async" [value]="instructor.id">
           {{instructor.firstName}} {{instructor.lastName}}
         </mat-option>
       </mat-select>
