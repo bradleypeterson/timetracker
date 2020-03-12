@@ -1,1 +1,7 @@
-<p>course-detail works!</p>
+<app-content-section [title]="(course$ | async)?.courseName">
+  <p>
+    Course Id: {{(course$ | async)?.courseID}}
+    <br/>
+    Course Description: {{(course$ | async)?.description}}
+  </p>
+</app-content-section>

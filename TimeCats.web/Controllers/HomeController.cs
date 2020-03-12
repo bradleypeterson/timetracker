@@ -243,27 +243,14 @@ namespace TimeCats.Controllers
         /// <param name="json"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddCourse([FromBody] object json)
+        public IActionResult AddCourse([FromBody] Course newCourse)
         {
-            var JsonString = json.ToString();
-            
-            if (GetUserType() == 'I' || IsAdmin())
-            {
-                var course = _courseService.AddCourse(new Course()
-                {
-                    courseName = "New Course",
-                    InstructorId = 2,
-                    isActive = true,
-                    description = ""
-                });
-    
-                if (course.courseID > 0)
-                    return Ok(course.courseID);
-                else
-                    return StatusCode(500);
-            }
-            
-            return Unauthorized();
+            var course = _courseService.AddCourse(newCourse);
+
+            if (course.courseID > 0)
+                return Ok(course.courseID);
+            else
+                return StatusCode(500);
         }
 
         /// <summary>
@@ -610,6 +597,13 @@ namespace TimeCats.Controllers
             return Ok(retrievedCourse);
         }
 
+        [HttpGet]
+        public IActionResult GetCourse(int id)
+        {
+            var course = _courseService.GetCourse(id);
+            return Ok(course);
+        }
+
         /// <summary>
         ///     Get a list of all the courses
         /// </summary>
@@ -902,6 +896,8 @@ namespace TimeCats.Controllers
                 
                 // We found a user! Send them to the Dashboard and save their Session
                 HttpContext.Session.SetObjectAsJson("user", user);
+                
+                var test = HttpContext.Session.GetObjectFromJson<User>("user");
                 user.password = null;
                 user.Salt = null;
                 return Ok(user);

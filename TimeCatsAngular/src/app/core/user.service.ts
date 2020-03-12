@@ -19,6 +19,10 @@ export class UserService {
     this.users = new BehaviorSubject<User[]>(new Array<User>());
   }
 
+  public checkSession(): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}home/CheckSession`);
+  }
+
   private getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.allUsersEndpoint)
       .pipe(

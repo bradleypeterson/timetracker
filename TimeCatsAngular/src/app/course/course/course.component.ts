@@ -13,7 +13,7 @@ export class CourseComponent implements OnInit {
   public courseDisplayedColumns: string[];
 
   constructor(private courseService: CourseService) {
-    this.courseDisplayedColumns = ["courseID", "courseName", "description"];
+    this.courseDisplayedColumns = ["courseID", "courseName", "description", "instructorId"];
   }
 
   ngOnInit(): void {

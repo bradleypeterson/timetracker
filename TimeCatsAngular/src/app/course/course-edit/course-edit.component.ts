@@ -31,6 +31,9 @@ export class CourseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.instructors = this.userService.getInstructors();
+    this.userService.checkSession().subscribe((session) => {
+      console.log("Valid Session: " + session);
+    });
   }
 
   getId(): string {
