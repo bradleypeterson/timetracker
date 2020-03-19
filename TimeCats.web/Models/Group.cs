@@ -20,9 +20,7 @@ namespace TimeCats.Models
 
         [Required]
         public int projectID { get; set; }
-
-        [NotMapped]
-        public Project Project { get; set; }
+        public Project project { get; set; }
 
         [NotMapped]
         public int evalID { get; set; }

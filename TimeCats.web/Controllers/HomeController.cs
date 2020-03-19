@@ -60,7 +60,7 @@ namespace TimeCats.Controllers
         public int GetCourseForGroup(int groupID)
         {
             var group = _groupService.GetGroupByID(groupID);
-            return group.Project.CourseID;
+            return _projectService.GetProjectById(group.projectID).CourseID;
         }
 
         /// <summary>
@@ -666,7 +666,7 @@ namespace TimeCats.Controllers
             var group = _groupService.GetGroupByID(groupID);
 
             // Make sure that the user is part of the group's course
-            var courseID = group.Project.CourseID;
+            var courseID = _projectService.GetProjectById(group.projectID).CourseID;
             if (IsStudentInCourse(courseID) ||
                 IsAdmin() ||
                 IsInstructorForCourse(courseID))

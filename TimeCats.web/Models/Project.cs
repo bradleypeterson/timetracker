@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace TimeCats.Models
 {
@@ -16,8 +17,7 @@ namespace TimeCats.Models
 
         [Required]
         public string description { get; set; }
-
-        [NotMapped]
+        
         public List<Group> groups { get; set; }
 
         [Required]

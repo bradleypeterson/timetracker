@@ -26,7 +26,6 @@ namespace TimeCats.Services
         public Group GetGroupByID(int groupID)
         {
             return _context.Groups
-                .Include(g => g.Project)
                 .FirstOrDefault(g => g.groupID == groupID);
         }
 

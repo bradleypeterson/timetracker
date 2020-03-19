@@ -3,8 +3,6 @@
     $scope.group = {};
     $scope.group.users = {};
 
-    //$scope.newNumber = 13; //TODO get rid of this
-
     $scope.load = function () {
         $scope.groupID = $routeParams.ID;
 
