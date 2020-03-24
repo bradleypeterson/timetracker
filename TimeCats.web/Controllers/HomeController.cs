@@ -237,19 +237,13 @@ namespace TimeCats.Controllers
 
         #region Endpoints
 
-        [HttpGet]
-        public IActionResult GetInstructors()
-        {
-            return Ok(_userService.GetInstructors());
-        }
-
         /// <summary>
         ///     Add a course. Returns the course ID
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddCourse([FromBody] Course newCourse)
+        public IActionResult AddCourse([FromBody] object json)
         {
             var course = _courseService.AddCourse(newCourse);
 
@@ -603,13 +597,6 @@ namespace TimeCats.Controllers
             return Ok(retrievedCourse);
         }
 
-        [HttpGet]
-        public IActionResult GetCourse(int id)
-        {
-            var course = _courseService.GetCourse(id);
-            return Ok(course);
-        }
-
         /// <summary>
         ///     Get a list of all the courses
         /// </summary>
@@ -902,11 +889,7 @@ namespace TimeCats.Controllers
                 
                 // We found a user! Send them to the Dashboard and save their Session
                 HttpContext.Session.SetObjectAsJson("user", user);
-                
-                var test = HttpContext.Session.GetObjectFromJson<User>("user");
-                user.password = null;
-                user.Salt = null;
-                return Ok(user);
+                return Ok();
             }
 
             //return Unauthorized (401) if the username or password is wrong
