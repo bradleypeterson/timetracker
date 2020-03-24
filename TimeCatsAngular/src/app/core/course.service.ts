@@ -28,9 +28,9 @@ export class CourseService {
   }
 
   public addCourse(course: Course): void {
-    this.http.post<Course>(this.addCourseEndpoint, course)
+    this.http.post<number>(this.addCourseEndpoint, course)
       .subscribe(createdCourse => {
-        this.router.navigate(["/courses/course/:id", createdCourse.courseID]);
+        this.router.navigate(["/courses/course/", createdCourse]);
       });
   }
 }
