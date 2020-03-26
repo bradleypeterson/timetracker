@@ -5,3 +5,11 @@
     Course Description: {{(course$ | async)?.description}}
   </p>
 </app-content-section>
+
+<app-content-section title="Users in Course">
+  <app-select-table [dataSource]="users$ | async"
+                    [initialSelection]=""
+                    [displayedColumns]="userInfo">
+
+  </app-select-table>
+</app-content-section>

@@ -10,7 +10,7 @@
         if (!$scope.projectID) $location.path('/courses');
 
         usSpinnerService.spin('spinner');
-        $http.post("/Home/GetProject", { projectID: $scope.projectID })
+        $http.post("/Home/GetProject", $scope.projectID)
             .then(function (response) {
                 $scope.project = {};
                 $scope.project.projectID = response.data.projectID;
@@ -19,25 +19,29 @@
                 $scope.project.description = response.data.description;
                 $scope.project.courseID = response.data.courseID;
                 $scope.project.groups = {};
-                $.each(response.data.groups, function (index, group) {
-                    $scope.project.groups[group.groupID] = {};
-                    $scope.project.groups[group.groupID].evalID = group.evalID;
-                    $scope.project.groups[group.groupID].groupID = group.groupID;
-                    $scope.project.groups[group.groupID].groupName = group.groupName;
-                    $scope.project.groups[group.groupID].isActive = group.isActive;
-                    $scope.project.groups[group.groupID].users = {};
-                    //Setting users to be in the index of their userID
-                    $.each(group.users, function (index, user) {
-                        $scope.project.groups[group.groupID].users[user.userID] = {};
-                        $scope.project.groups[group.groupID].users[user.userID].firstName = user.firstName;
-                        $scope.project.groups[group.groupID].users[user.userID].lastName = user.lastName;
-                        $scope.project.groups[group.groupID].users[user.userID].isActive = user.isActive;
-                        $scope.project.groups[group.groupID].users[user.userID].userID = user.userID;
-                        $scope.project.groups[group.groupID].users[user.userID].timecards = {};
-                        $.each(user.timecards, function (index, timecard) {
-                            $scope.project.groups[group.groupID].users[user.userID].timecards[timecard.timeslotID] = timecard;
-                            $scope.project.groups[group.groupID].users[user.userID].timecards[timecard.timeslotID].hours = "";
-                        });
+                
+                $http.post("/Home/GetGroupsForProject", $scope.projectID)
+                    .then(function (response) {
+                        $.each(response, function (index, group) {
+                            $scope.project.groups[group.groupID] = {};
+                            $scope.project.groups[group.groupID].evalID = group.evalID;
+                            $scope.project.groups[group.groupID].groupID = group.groupID;
+                            $scope.project.groups[group.groupID].groupName = group.groupName;
+                            $scope.project.groups[group.groupID].isActive = group.isActive;
+                            $scope.project.groups[group.groupID].users = {};
+                            //Setting users to be in the index of their userID
+                            $.each(group.users, function (index, user) {
+                                $scope.project.groups[group.groupID].users[user.userID] = {};
+                                $scope.project.groups[group.groupID].users[user.userID].firstName = user.firstName;
+                                $scope.project.groups[group.groupID].users[user.userID].lastName = user.lastName;
+                                $scope.project.groups[group.groupID].users[user.userID].isActive = user.isActive;
+                                $scope.project.groups[group.groupID].users[user.userID].userID = user.userID;
+                                $scope.project.groups[group.groupID].users[user.userID].timecards = {};
+                                $.each(user.timecards, function (index, timecard) {
+                                    $scope.project.groups[group.groupID].users[user.userID].timecards[timecard.timeslotID] = timecard;
+                                    $scope.project.groups[group.groupID].users[user.userID].timecards[timecard.timeslotID].hours = "";
+                                });
+                            });
                     });
                 });
                 

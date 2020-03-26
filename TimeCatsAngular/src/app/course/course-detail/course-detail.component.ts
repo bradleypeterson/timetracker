@@ -4,6 +4,7 @@ import {CourseService} from "../../core/course.service";
 import {Course} from "../../course";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {User} from "../../authentication/user";
 
 @Component({
   selector: "app-course-detail",
@@ -12,6 +13,12 @@ import {Observable} from "rxjs";
 })
 export class CourseDetailComponent implements OnInit {
   public course$: Observable<Course>;
+  public users$: Observable<User[]>;
+
+  public userInfo = [
+    'userID',
+    'username'
+  ];
 
   constructor(private activatedRoute: ActivatedRoute,
               private courseService: CourseService) { }
@@ -19,6 +26,10 @@ export class CourseDetailComponent implements OnInit {
   ngOnInit(): void {
     this.course$ = this.activatedRoute.paramMap.pipe(
       switchMap(params => this.courseService.getCourseById(+params.get("id")))
-    );
+    )
+
+    this.course$.subscribe(course => {
+      this.users$ = this.courseService.getUsersInCourse(course.id);
+    })
   }
 }

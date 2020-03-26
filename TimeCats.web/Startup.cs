@@ -32,6 +32,7 @@ namespace TimeCats
                 options.UseNpgsql(Configuration["ConnectionString:TimeTrackerDB"]));
             services.AddMvc(options => { options.EnableEndpointRouting = false; });
             services.AddSession(options => { options.IdleTimeout = TimeSpan.FromHours(1); });
+            services.AddScoped<CryptographyService>();
             services.AddScoped<StudentTimeTrackerService>();
             services.AddScoped<CourseService>();
             services.AddScoped<EvalService>();

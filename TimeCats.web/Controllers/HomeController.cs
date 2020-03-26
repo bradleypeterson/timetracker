@@ -23,6 +23,7 @@ namespace TimeCats.Controllers
         private readonly ProjectService _projectService;
         private readonly TimeService _timeService;
         private readonly UserService _userService;
+        private readonly CryptographyService _cryptoService;
 
         public HomeController(IServiceProvider serviceProvider)
         {
@@ -33,6 +34,7 @@ namespace TimeCats.Controllers
             _projectService = serviceProvider.GetRequiredService<ProjectService>();
             _timeService = serviceProvider.GetRequiredService<TimeService>();
             _userService = serviceProvider.GetRequiredService<UserService>();
+            _cryptoService = serviceProvider.GetRequiredService<CryptographyService>();
         }
         
         public IActionResult Error()
@@ -154,10 +156,8 @@ namespace TimeCats.Controllers
         public bool IsStudentInCourse(int courseID)
         {
             var user = HttpContext.Session.GetObjectFromJson<User>("user");
-            var courses = _courseService.GetCourses();
-            
-            return courses.Select(c => c.users)
-                .Any(u => u.Any(u => u.userID == user.userID));
+            var courses = _courseService.GetCoursesByUser(user);
+            return courses.Any(c => c.courseID == courseID);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace TimeCats.Controllers
         /// <param name="json"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddCourse([FromBody] object json)
+        public IActionResult AddCourse(Course newCourse)
         {
             var course = _courseService.AddCourse(newCourse);
 
@@ -881,15 +881,16 @@ namespace TimeCats.Controllers
 
             //Check database for User and create a session
             var user = _timeTrackerService.GetUserByUsername(loginUser.username);
-            var crypto = new CryptographyService();
 
-            if (crypto.Verify(user.password, user.Salt, loginUser.password))
+            if (_cryptoService.Verify(user.password, user.Salt, loginUser.password))
             {
                 if (!user.isActive) return StatusCode(403); //return Forbidden (403) if the user's account isn't active
                 
                 // We found a user! Send them to the Dashboard and save their Session
-                HttpContext.Session.SetObjectAsJson("user", user);
-                return Ok();
+                HttpContext.Session.GetObjectFromJson<User>("user");
+                user.password = null;
+                user.Salt = null;
+                return Ok(user);
             }
 
             //return Unauthorized (401) if the username or password is wrong
@@ -1127,6 +1128,12 @@ namespace TimeCats.Controllers
 
             if (templates.Count > 0) return Ok(templates);
             return NoContent();
+        }
+
+        [HttpGet]
+        public IActionResult GetInstructors()
+        {
+            return Ok(_userService.GetInstructors());
         }
 
         [HttpPost]
