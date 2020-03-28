@@ -1,8 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Course} from "../../course";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {CourseService} from "../../core/course.service";
 
 @Component({
   selector: "app-instructor-dashboard",
@@ -10,10 +11,11 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ["./instructor-dashboard.component.scss"]
 })
 export class InstructorDashboardComponent implements OnInit {
-  public courses: BehaviorSubject<Course[]>;
+  public courses: Observable<Course[]>;
   public displayedColumns: string[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private courseService: CourseService) {
     this.courses = new BehaviorSubject<Course[]>([]);
     this.displayedColumns = ["courseID", "courseName", "description"];
   }
@@ -23,9 +25,6 @@ export class InstructorDashboardComponent implements OnInit {
   }
 
   public getCourses(): void {
-    this.http.get<Course[]>(`${environment.apiUrl}home/GetCourses`)
-      .subscribe((courses) => {
-        this.courses.next(courses);
-      });
+    this.courses = this.courseService.getCourses();
   }
 }

@@ -1,5 +1,7 @@
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="select">
+  <ng-container class="mat-column-select"
+                matColumnDef="select"
+                (click)="cellClicked($event)">
     <mat-header-cell *matHeaderCellDef>
       <mat-checkbox (change)="$event ? masterToggle() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
@@ -22,5 +24,7 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           (click)="cellClicked(row)">
+  </mat-row>
 </mat-table>

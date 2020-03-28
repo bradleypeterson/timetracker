@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output} from "@angular/core";
 import {SelectionModel} from "@angular/cdk/collections";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Course} from "../../course";
@@ -14,14 +14,14 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
   @Input() initialSelection = [];
   @Input() displayedColumns: string[];
   @Input() dataSource: T[];
+  @Output() selectedItem = new EventEmitter<T>();
 
   public columns: string[];
-  public selection = new SelectionModel<T>(this.allowMultiSelect, this.initialSelection);
-
-  constructor() {
-  }
+  public selection: SelectionModel<T>;
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<T>(this.allowMultiSelect, this.initialSelection);
+
     this.columns = this.displayedColumns.slice();
     if (this.allowMultiSelect) {
       this.displayedColumns.splice(0, 0, "select");
@@ -29,6 +29,9 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
   }
 
   isAllSelected(): boolean {
+    if (!this.selection.selected || !this.dataSource) {
+      return false;
+    }
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.length;
     return numSelected === numRows;
@@ -45,5 +48,10 @@ export class SelectTableComponent<T extends Identifiable> implements OnInit {
       return `${this.isAllSelected() ? "select" : "deselect"} all`;
     }
     return `${this.selection.isSelected(row) ? "deselect" : "select"} row ${row.id + 1}`;
+  }
+
+  cellClicked(row: T) {
+    this.selection.toggle(row);
+    this.selectedItem.emit(row);
   }
 }

@@ -2,7 +2,8 @@
   <app-content-section [title]="'Courses'">
     <app-select-table [allowMultiSelect]="false"
                       [displayedColumns]="courseDisplayedColumns"
-                      [dataSource]="courses">
+                      [dataSource]="courses"
+                      (selectedItem)="onCourseSelected($event)">
     </app-select-table>
   </app-content-section>
 </div>

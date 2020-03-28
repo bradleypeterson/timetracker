@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {Course} from "../../course";
 import {CourseService} from "../../core/course.service";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-course",
@@ -12,7 +13,8 @@ export class CourseComponent implements OnInit {
   public courses: Course[];
   public courseDisplayedColumns: string[];
 
-  constructor(private courseService: CourseService) {
+  constructor(private courseService: CourseService,
+              private router: Router) {
     this.courseDisplayedColumns = ["courseID", "courseName", "description", "instructorId"];
   }
 
@@ -25,5 +27,9 @@ export class CourseComponent implements OnInit {
       .subscribe(courses => {
         this.courses = courses;
       });
+  }
+
+  onCourseSelected(course: Course) {
+    this.router.navigate(["/courses/course/", course.courseID])
   }
 }
