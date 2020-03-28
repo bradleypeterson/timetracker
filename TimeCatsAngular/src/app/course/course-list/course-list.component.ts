@@ -6,10 +6,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: "app-course",
-  templateUrl: "./course.component.html",
-  styleUrls: ["./course.component.scss"]
+  templateUrl: "./course-list.component.html",
+  styleUrls: ["./course-list.component.scss"]
 })
-export class CourseComponent implements OnInit {
+export class CourseListComponent implements OnInit {
   public courses: Course[];
   public courseDisplayedColumns: string[];
 
