@@ -586,13 +586,10 @@ namespace TimeCats.Controllers
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        [HttpPost]
-        public IActionResult GetCourse([FromBody] object json)
-        {
-            var JsonString = json.ToString();
-            var course = JsonConvert.DeserializeObject<Course>(JsonString);
-
-            var retrievedCourse = _courseService.GetCourse(course.courseID);
+        [HttpGet]
+        public IActionResult GetCourse(int id)
+        { 
+	        var retrievedCourse = _courseService.GetCourse(id);
 
             return Ok(retrievedCourse);
         }
