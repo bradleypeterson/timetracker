@@ -243,7 +243,7 @@ namespace TimeCats.Controllers
         /// <param name="json"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddCourse(Course newCourse)
+        public IActionResult AddCourse([FromBody] Course newCourse)
         {
             var course = _courseService.AddCourse(newCourse);
 
