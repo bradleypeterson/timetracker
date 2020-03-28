@@ -26,10 +26,10 @@ export class CourseDetailComponent implements OnInit {
   ngOnInit(): void {
     this.course$ = this.activatedRoute.paramMap.pipe(
       switchMap(params => this.courseService.getCourseById(+params.get("id")))
-    )
+    );
 
     this.course$.subscribe(course => {
-      this.users$ = this.courseService.getUsersInCourse(course.id);
-    })
+      this.users$ = this.courseService.getUsersInCourse(course.courseID);
+    });
   }
 }
