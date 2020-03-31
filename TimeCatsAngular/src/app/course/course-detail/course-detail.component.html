@@ -6,6 +6,13 @@
   </p>
 </app-content-section>
 
+<app-content-section title="Course Projects">
+  <app-select-table [dataSource]="projects$ | async"
+                    [displayedColumns]="projectInfo">
+
+  </app-select-table>
+</app-content-section>
+
 <app-content-section title="Users in Course">
   <app-select-table [dataSource]="users$ | async"
                     [displayedColumns]="userInfo">

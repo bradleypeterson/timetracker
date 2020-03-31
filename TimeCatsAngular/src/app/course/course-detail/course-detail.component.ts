@@ -5,6 +5,8 @@ import {Course} from "../../course";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {User} from "../../authentication/user";
+import {ProjectService} from "../../core/project.service";
+import {Project} from "../../project";
 
 @Component({
   selector: "app-course-detail",
@@ -14,14 +16,23 @@ import {User} from "../../authentication/user";
 export class CourseDetailComponent implements OnInit {
   public course$: Observable<Course>;
   public users$: Observable<User[]>;
+  public projects$: Observable<Project[]>;
 
   public userInfo = [
     'userID',
     'username'
   ];
 
+  public projectInfo = [
+    'projectID',
+    'projectName',
+    'description',
+    'isActive'
+  ];
+
   constructor(private activatedRoute: ActivatedRoute,
-              private courseService: CourseService) { }
+              private courseService: CourseService,
+              private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.course$ = this.activatedRoute.paramMap.pipe(
@@ -30,6 +41,10 @@ export class CourseDetailComponent implements OnInit {
 
     this.course$.subscribe(course => {
       this.users$ = this.courseService.getUsersInCourse(course.courseID);
+    });
+
+    this.course$.subscribe(course => {
+      this.projects$ = this.projectService.getProjectsInCourse(course.courseID);
     });
   }
 }

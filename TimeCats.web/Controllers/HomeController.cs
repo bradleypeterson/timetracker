@@ -14,6 +14,7 @@ using TimeCats.Services;
 
 namespace TimeCats.Controllers
 {
+            
     public class HomeController : Controller
     {
         private readonly StudentTimeTrackerService _timeTrackerService;
@@ -78,6 +79,13 @@ namespace TimeCats.Controllers
         {
             var courseId = _projectService.GetProjectById(projectID).CourseID;
             return courseId;
+        }
+
+        [HttpGet]
+        public IActionResult GetProjectsInCourse(int id)
+        {
+            var projects = _projectService.GetProjectsByCourseId(id);
+	        return Ok(projects);
         }
 
         /// <summary>
