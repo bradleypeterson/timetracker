@@ -14,6 +14,7 @@ import {MatTableModule} from "@angular/material/table";
 import {SharedModule} from "./shared/shared.module";
 import {MatButtonModule} from "@angular/material/button";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import { GroupModule } from './group/group.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     DashboardModule,
     MatTableModule,
     SharedModule,
-    MatButtonModule
+    MatButtonModule,
+    GroupModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -681,6 +681,14 @@ namespace TimeCats.Controllers
             return Unauthorized();
         }
 
+        [HttpGet]
+        public IActionResult GetProjectById(int id)
+        {
+            var project = _projectService.GetProjectById(id);
+            project.groups.ForEach(group => group.Project = null);
+            return Ok(project);
+        }
+
         /// <summary>
         ///     Returns OK if admmin or ID's match
         /// </summary>

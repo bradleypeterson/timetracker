@@ -10,7 +10,8 @@
                      [hasButtons]="true"
                      [buttons]="[addProjectButton]">
   <app-select-table [dataSource]="projects$ | async"
-                    [displayedColumns]="projectInfo">
+                    [displayedColumns]="projectInfo"
+                    (selectedItem)="onProjectSelected($event)">
 
   </app-select-table>
 </app-content-section>

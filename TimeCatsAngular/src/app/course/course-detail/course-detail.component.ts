@@ -59,4 +59,8 @@ export class CourseDetailComponent implements OnInit {
       this.projects$ = this.projectService.getProjectsInCourse(course.courseID);
     });
   }
+
+  onProjectSelected(project: Project) {
+    this.router.navigate(["/projects/project/", project.projectID]);
+  }
 }

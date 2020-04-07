@@ -29,6 +29,11 @@ const routes: Routes = [
     canActivate: [AuthenticatedRouteGuardService]
   },
   {
+    path: "groups",
+    loadChildren: () => import('./group/group.module').then(m => m.GroupModule),
+    canActivate: [AuthenticatedRouteGuardService]
+  },
+  {
     path: "error",
     component: ErrorComponent
   },

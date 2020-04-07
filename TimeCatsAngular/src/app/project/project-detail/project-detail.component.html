@@ -1,3 +1,10 @@
-<app-content-section>
+<app-content-section [title]="(project$ | async)?.projectName">
+  <p>
+    Project Id: {{(project$ | async)?.projectID}} <br/>
+    Project Description: {{(project$ | async)?.description}}
+  </p>
+</app-content-section>
+
+<app-content-section title="Groups">
 
 </app-content-section>

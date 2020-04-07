@@ -30,6 +30,6 @@ export class CourseListComponent implements OnInit {
   }
 
   onCourseSelected(course: Course) {
-    this.router.navigate(["/courses/course/", course.courseID])
+    this.router.navigate(["/courses/course/", course.courseID]);
   }
 }
