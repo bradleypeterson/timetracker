@@ -59,7 +59,7 @@ export class ContentSectionComponent {
   @Input() collapsible = false;
   @Input() state: "open" | "closed" = "open";
   @Input() locked = false;
-  @Input() noButtons = false;
+  @Input() hasButtons = false;
   @Input() compact = false;
   @Input() svgIcon: string = null;
 
@@ -67,17 +67,12 @@ export class ContentSectionComponent {
 
   private Buttons = new Array<ContentSectionButton>();
   @Input()
-  set buttons(buttons: Array<ContentSectionButton> | ContentSectionButton) {
-    if (buttons == null) {
-      return;
-    }
-    if (buttons.constructor !== Array) {
-      buttons = [(buttons as ContentSectionButton)];
-    }
-    this.Buttons = (buttons as Array<ContentSectionButton>);
+  set buttons(buttons: Array<ContentSectionButton>) {
+    if (buttons == null) { return; }
+    this.Buttons = buttons;
   }
-  get buttons() {
-    return this.noButtons ? new Array() : this.Buttons;
+  get buttons(): Array<ContentSectionButton> {
+    return this.hasButtons ? this.Buttons : new Array<ContentSectionButton>();
   }
 
   public toggleState(): void {

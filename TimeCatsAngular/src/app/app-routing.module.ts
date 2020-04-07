@@ -24,6 +24,11 @@ const routes: Routes = [
     canActivate: [AuthenticatedRouteGuardService]
   },
   {
+    path: "projects",
+    loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
+    canActivate: [AuthenticatedRouteGuardService]
+  },
+  {
     path: "error",
     component: ErrorComponent
   },

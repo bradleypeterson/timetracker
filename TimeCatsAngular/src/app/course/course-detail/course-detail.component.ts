@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {CourseService} from "../../core/course.service";
 import {Course} from "../../course";
 import {switchMap} from "rxjs/operators";
@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {User} from "../../authentication/user";
 import {ProjectService} from "../../core/project.service";
 import {Project} from "../../project";
+import {ContentSectionButton} from "../../shared/content-section/content-section-button";
 
 @Component({
   selector: "app-course-detail",
@@ -29,10 +30,21 @@ export class CourseDetailComponent implements OnInit {
     'description',
     'isActive'
   ];
+  addProjectButton: ContentSectionButton;
+  addUsersButton: ContentSectionButton;
 
   constructor(private activatedRoute: ActivatedRoute,
               private courseService: CourseService,
-              private projectService: ProjectService) { }
+              private projectService: ProjectService,
+              private router: Router) {
+    this.addProjectButton = new ContentSectionButton("Add Project", null, (event) => {
+      router.navigate(["projects/add"]);
+    }, "blue", null, false);
+
+    this.addUsersButton = new ContentSectionButton("Invite User", null, (event) => {
+      router.navigate(["courses/invite-user"]);
+    }, "", null, false);
+  }
 
   ngOnInit(): void {
     this.course$ = this.activatedRoute.paramMap.pipe(

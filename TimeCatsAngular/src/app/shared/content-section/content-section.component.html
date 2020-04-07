@@ -11,6 +11,13 @@
     <mat-icon [svgIcon]="svgIcon" *ngIf="svgIcon"></mat-icon>
     <h3>{{title}}</h3>
     <span class="spacer"></span>
+    <ng-container *ngFor="let btn of buttons">
+      <button type="button"
+              mat-raised-button
+              (click)="btn.click($event)"
+              [textContent]="btn.text">
+      </button>
+    </ng-container>
   </div>
   <div class="section-content" [@state]="state">
     <ng-content></ng-content>

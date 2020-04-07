@@ -6,14 +6,18 @@
   </p>
 </app-content-section>
 
-<app-content-section title="Course Projects">
+<app-content-section title="Projects"
+                     [hasButtons]="true"
+                     [buttons]="[addProjectButton]">
   <app-select-table [dataSource]="projects$ | async"
                     [displayedColumns]="projectInfo">
 
   </app-select-table>
 </app-content-section>
 
-<app-content-section title="Users in Course">
+<app-content-section title="Users"
+                     [buttons]="[addUsersButton]"
+                     [hasButtons]="true">
   <app-select-table [dataSource]="users$ | async"
                     [displayedColumns]="userInfo">
 

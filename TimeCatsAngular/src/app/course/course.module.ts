@@ -14,17 +14,22 @@ import {MatSelectModule} from "@angular/material/select";
 import { CourseAddComponent } from './course-add/course-add.component';
 
 @NgModule({
-  declarations: [CourseListComponent, CourseDetailComponent, CourseEditComponent, CourseAddComponent],
-    imports: [
-        CommonModule,
-        CourseRoutingModule,
-        SharedModule,
-        MatIconModule,
-        MatButtonModule,
-        FormsModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule
-    ]
+  declarations: [
+    CourseListComponent,
+    CourseDetailComponent,
+    CourseEditComponent,
+    CourseAddComponent
+  ],
+  imports: [
+    CommonModule,
+    CourseRoutingModule,
+    SharedModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
+  ]
 })
 export class CourseModule { }
