@@ -1,1 +1,18 @@
-<p>project-add works!</p>
+<app-content-section [title]="contentSectionTitle">
+  <form (submit)="createProject()" [formGroup]="projectAddForm">
+    <mat-form-field class="full-width-field">
+      <mat-label>Course Name</mat-label>
+      <input formControlName="name" matInput [value]="getName()"/>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="full-width-field">
+      <mat-label>Course Description</mat-label>
+      <textarea formControlName="description" matInput placeholder="Ex. A project about..." [value]="getDescription()"></textarea>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="full-width-field">
+      <mat-label>Attached Course</mat-label>
+      <input formControlName="project" matInput [value]="getCourseName()"/>
+    </mat-form-field>
+  </form>
+</app-content-section>
