@@ -69,7 +69,7 @@
          * @param {*} startTime 
          */
         $scope.createTime = function (id, startTime = '') {
-            debugger;
+            
             var data = {
                 userID: id,
                 groupID: $scope.groupID,
@@ -282,6 +282,7 @@
                 toastr["error"]("The logged in user isn't a member of the group.");
             }
         };
+
         ///This happens when the user presses the clock in/out button////
         $scope.endTime = function () {
             if ($scope.userInGroup()) {
@@ -326,7 +327,7 @@
                 if(userID == null || timeslotID == null || timeIn == '' || timeOut == ''){
                     toastr["error"]("Please make sure all info is filled in before submitting")
                 } else {
-                    $http.post("/Time/SaveTime")
+                    toastr['success']('You got all the info in. yay')
                 }
 
             } catch {
@@ -335,47 +336,47 @@
         };
 
 
-        $scope.saveTime = function (userID, timeslotID) {
-            if ($scope.group.users[userID].timecards[timeslotID].timeIn > moment().format('MM/DD/YYYY h:mm A')) {
-                toastr["error"]("TimeIn > Current Date");
-                $scope.group.users[userID].timecards[timeslotID].timeIn = moment().format('MM/DD/YYYY h:mm A');
-            }
-            if ($scope.group.users[userID].timecards[timeslotID].timeOut > moment().format('MM/DD/YYYY h:mm A')) {
-                toastr["error"]("TimeOut > Current Date");
-                $scope.group.users[userID].timecards[timeslotID].timeOut = moment().format('MM/DD/YYYY h:mm A');
-            }
+         $scope.saveTime = function (userID, timeslotID) {
+             if ($scope.group.users[userID].timecards[timeslotID].timeIn > moment().format('MM/DD/YYYY h:mm A')) {
+                 toastr["error"]("TimeIn > Current Date");
+                 $scope.group.users[userID].timecards[timeslotID].timeIn = moment().format('MM/DD/YYYY h:mm A');
+             }
+             if ($scope.group.users[userID].timecards[timeslotID].timeOut > moment().format('MM/DD/YYYY h:mm A')) {
+                 toastr["error"]("TimeOut > Current Date");
+                 $scope.group.users[userID].timecards[timeslotID].timeOut = moment().format('MM/DD/YYYY h:mm A');
+             }
 
 
-            if ($scope.group.users[userID].timecards[timeslotID].timeIn > $scope.group.users[userID].timecards[timeslotID].timeOut || $scope.group.users[userID].timecards[timeslotID].timeIn === $scope.group.users[userID].timecards[timeslotID].timeOut) {
-                if ($scope.group.users[userID].timecards[timeslotID].timeOut !== '') {
-                    $scope.group.users[userID].timecards[timeslotID].timeOut = '';
-                    $scope.group.users[userID].timecards[timeslotID].hours = 0;
+             if ($scope.group.users[userID].timecards[timeslotID].timeIn > $scope.group.users[userID].timecards[timeslotID].timeOut || $scope.group.users[userID].timecards[timeslotID].timeIn === $scope.group.users[userID].timecards[timeslotID].timeOut) {
+                 if ($scope.group.users[userID].timecards[timeslotID].timeOut !== '') {
+                     $scope.group.users[userID].timecards[timeslotID].timeOut = '';
+                     $scope.group.users[userID].timecards[timeslotID].hours = 0;
 
-                    toastr["error"]("Invalid Time Input");
-                }
-            }
+                     toastr["error"]("Invalid Time Input");
+                 }
+             }
 
-            $http.post("/Time/SaveTime", $scope.group.users[userID].timecards[timeslotID])
-                .then(function (response) {
-                    if ($scope.group.users[userID].timecards[timeslotID].timeIn === '' || $scope.group.users[userID].timecards[timeslotID].timeOut === '') {
-                        $scope.group.users[userID].timecards[timeslotID].hours = 0;
-                    }
-                        else {
-                        $scope.group.users[userID].timecards[timeslotID].hours = moment.duration(
-                            moment($scope.group.users[userID].timecards[timeslotID].timeOut).diff(
-                                $scope.group.users[userID].timecards[timeslotID].timeIn)).asHours().toFixed(2);
-                    }
+             $http.post("/Time/SaveTime", $scope.group.users[userID].timecards[timeslotID])
+                 .then(function (response) {
+                     if ($scope.group.users[userID].timecards[timeslotID].timeIn === '' || $scope.group.users[userID].timecards[timeslotID].timeOut === '') {
+                         $scope.group.users[userID].timecards[timeslotID].hours = 0;
+                     }
+                         else {
+                         $scope.group.users[userID].timecards[timeslotID].hours = moment.duration(
+                             moment($scope.group.users[userID].timecards[timeslotID].timeOut).diff(
+                                 $scope.group.users[userID].timecards[timeslotID].timeIn)).asHours().toFixed(2);
+                     }
 
-                    $scope.updateChart();
-                    toastr["info"]("Timeslot Updated.");
-                }, function (response) {
-                    if (response.status === 401) toastr["error"]("Unauthorized to edit this time entry.");
-                    else if (response.status === 400) toastr["error"]("Failed to save time entry due to : negative time or " +
-                        "clock out in the future.");
-                    else toastr["error"]( response.status.toString() + "Failed to save time entry, unknown error.");
-                });
+                     $scope.updateChart();
+                     toastr["info"]("Timeslot Updated.");
+                 }, function (response) {
+                     if (response.status === 401) toastr["error"]("Unauthorized to edit this time entry.");
+                     else if (response.status === 400) toastr["error"]("Failed to save time entry due to : negative time or " +
+                         "clock out in the future.");
+                     else toastr["error"]( response.status.toString() + "Failed to save time entry, unknown error.");
+                 });
             
-        };
+         };
 
         $scope.diffHours = function (timeIn, timeOut) {
             if (timeIn === '' || timeOut === '') return "0.00";
