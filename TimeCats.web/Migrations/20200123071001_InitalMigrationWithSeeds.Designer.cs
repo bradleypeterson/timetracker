@@ -129,7 +129,7 @@ namespace TimeCats.Migrations
                             projectName = "Test Project 1"
                         });
                 });
-
+            //@graceborges maybe this?
             modelBuilder.Entity("TimeCats.Models.TimeCard", b =>
                 {
                     b.Property<int>("timeslotID")

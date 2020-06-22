@@ -115,7 +115,7 @@ namespace TimeCats.Migrations
                         principalColumn: "projectID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
+            // @graceborges THIS might be what we're looking for
             migrationBuilder.CreateTable(
                 name: "TimeCards",
                 columns: table => new
