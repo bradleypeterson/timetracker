@@ -5,6 +5,10 @@
 
     //$scope.newNumber = 13; //TODO get rid of this
 
+    /**
+     * load
+     * @description pulls up everything on the page initially
+     */
     $scope.load = function () {
         $scope.groupID = $routeParams.ID;
 
@@ -58,7 +62,14 @@
             }
         });
 
+        /**
+         * createTime
+         * @description my guess is creating a time card...?
+         * @param {*} id 
+         * @param {*} startTime 
+         */
         $scope.createTime = function (id, startTime = '') {
+            debugger;
             var data = {
                 userID: id,
                 groupID: $scope.groupID,
@@ -88,6 +99,11 @@
                 });
         };
 
+        /**
+         * createTimeFromBlank
+         * @description we are creating a new blank time card....?
+         * @param {*} id 
+         */
         $scope.createTimeFromBlank = function (id) {
             var data = {
                 userID: id,
@@ -101,14 +117,11 @@
 
             if ($scope.group.users[id].blank.timeIn === '' && $scope.group.users[id].blank.timeOut === '' && $scope.group.users[id].blank.description === '')
                 return;
-
-            /*********************************************Jamison Edit*********************************/
             if (data.timeIn > moment().format('MM/DD/YYYY h:mm A')) {
                 $scope.group.users[id].blank.timeIn = '';
                 toastr["error"]("Invalid Start Time: Slot Not Created");
                 return;
             }
-            /********************************************End Jamison Edit******************************/
 
             usSpinnerService.spin('spinner');
             $http.post("/Time/CreateTimeCard", data)
@@ -133,6 +146,10 @@
                 });
         };
 
+        /**
+         * leaveGroup
+         * @description this will allow someone to leave a group they are working with?
+         */
         $scope.leaveGroup = function () {
             if (confirm('Are you sure you want to leave this group?')) {
                 usSpinnerService.spin('spinner');
@@ -150,11 +167,13 @@
                         if (response.status === 401) toastr["error"]("You are not part of this group.");
                         else toastr["error"]("Failed to leave the group, unknown error.");
                     });
-            } else {
-                // Do nothing!
-            }
+            } 
         };
 
+        /**
+         * joinGroup
+         * @description when a student finds their group to be added into...?
+         */
         $scope.joinGroup = function () {
             usSpinnerService.spin('spinner');
             $http.post("/Group/JoinGroup", { groupID: $scope.groupID })
@@ -181,6 +200,10 @@
                 });
         };
 
+        /**
+         * saveGroup
+         * @description saving the group to the db once created
+         */
         $scope.saveGroup = function () {
             $http.post("/Group/SaveGroup", {
                 groupID: $scope.group.groupID,
@@ -197,6 +220,10 @@
                 });
         };
 
+        /**
+         * userInGroup
+         * @description I'm not sure... just checking to see if user is currently in the group?
+         */
         $scope.userInGroup = function () {
             //Checks that the current user is listed in the current group.
             if (!$scope.$parent.user) return false;
@@ -216,6 +243,10 @@
             return inGroup;
         };
 
+        /**
+         * userActiveInGroup
+         * @description don't know how this is different than userInGroup....
+         */
         $scope.userActiveInGroup = function () {
             //Checks that the current user is listed in the current group.
             if (!$scope.$parent.user) return false;
@@ -230,6 +261,10 @@
             return inGroup;
         };
 
+        /**
+         * hasUnfinishedBusiness
+         * @description should be named better, but if a user doesn't have a timeout time
+         */
         $scope.hasUnfinishedBusiness = function () {
             var hasUnfinishedBusiness = false;
             if ($scope.userInGroup()) {
@@ -265,11 +300,12 @@
             }
         };
 
-        /***************************************Jamison Edit **************************************************/
-        /*
-        * @param {any} userID
-        * @param {any} timeslotID
-        */
+        /**
+         * deleteTime
+         * @description when a user wants to delete a time from their time card
+         * @param {*} userID 
+         * @param {*} timeslotID 
+         */
         $scope.deleteTime = function (userID, timeslotID) {
             toastr["warning"]("Deleting...");
             $http.post("/Time/DeleteTimeCard", $scope.group.users[userID].timecards[timeslotID])
@@ -279,10 +315,16 @@
         };
 
         /**
-         * ************************************************* End Jamison Edit *****************************************/
+         * submitTime
+         * @description this will submit all the information at once desirably once it is hit instead of 
+         *  having things pre load themselves
+         * @param {*} userID 
+         * @param {*} timeslotID 
+         */
+        $scope.submitTime = function(userID, timeslotID, ){};
+
 
         $scope.saveTime = function (userID, timeslotID) {
-            /******************************************************Jamison Edit**********************************************/
             if ($scope.group.users[userID].timecards[timeslotID].timeIn > moment().format('MM/DD/YYYY h:mm A')) {
                 toastr["error"]("TimeIn > Current Date");
                 $scope.group.users[userID].timecards[timeslotID].timeIn = moment().format('MM/DD/YYYY h:mm A');
@@ -301,7 +343,6 @@
                     toastr["error"]("Invalid Time Input");
                 }
             }
-            /******************************************************End Jamison Edit*****************************************/
 
             $http.post("/Time/SaveTime", $scope.group.users[userID].timecards[timeslotID])
                 .then(function (response) {
@@ -322,6 +363,7 @@
                         "clock out in the future.");
                     else toastr["error"]( response.status.toString() + "Failed to save time entry, unknown error.");
                 });
+            
         };
 
         $scope.diffHours = function (timeIn, timeOut) {
