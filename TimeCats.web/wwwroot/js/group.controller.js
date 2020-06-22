@@ -321,7 +321,18 @@
          * @param {*} userID 
          * @param {*} timeslotID 
          */
-        $scope.submitTime = function(userID, timeslotID, ){};
+        $scope.submitTime = function(userID, timeslotID, timeIn, timeOut){
+            try{
+                if(userID == null || timeslotID == null || timeIn == '' || timeOut == ''){
+                    toastr["error"]("Please make sure all info is filled in before submitting")
+                } else {
+                    $http.post("/Time/SaveTime")
+                }
+
+            } catch {
+
+            }
+        };
 
 
         $scope.saveTime = function (userID, timeslotID) {

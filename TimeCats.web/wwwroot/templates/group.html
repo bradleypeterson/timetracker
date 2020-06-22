@@ -188,7 +188,12 @@
                                         <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="deleteTime(u.userID, t.timeslotID)">Delete</button>
                                     </div>
                                 </td>
-
+                                <td>
+                                    <div>
+                                        <!-- Submit Button -->
+                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit 3</button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -206,10 +211,10 @@
                         <thead>
                             <tr class="row no-gutters ml-3 mr-1">
                                 <th scope="col" class="col col-md-4 col-lg">Time<span class="d-none d-lg-inline"> In</span></th>
-                                <th scope="col" class="col d-none d-lg-table-cell col-lg">Time 2</th>
+                                <th scope="col" class="col d-none d-lg-table-cell col-lg">Time </th>
                                 <th scope="col" class="col d-none d-sm-table-cell col-lg-6">Description</th>
                                 <th scope="col" class="hours-col">Hours</th>
-                                <th scope="col" class="col d-none">Submit</th>
+                                <th scope="col" class="col d-none d=d-sm-table-cell col-lg">Submit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -266,7 +271,13 @@
                                     <div class="row">
                                         <span class="col-2 pr-0 text-right">Desc&nbsp;</span>
                                         <textarea class="full-width form-control date-text description-textarea col" ng-model="u.blank.description" ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))"
-                                                  ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description That"></textarea>
+                                                  ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description"></textarea>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <!-- Submit Button -->
+                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit 1</button>
                                     </div>
                                 </td>
                             </tr>
@@ -327,6 +338,12 @@
                                         <span class="col-2 pr-0 text-right">Desc&nbsp;</span>
                                         <textarea class="full-width form-control date-text description-textarea col" ng-model="t.description" ng-readonly="!isUser(u.userID)" placeholder="Description"
                                                   ng-model-options="{debounce: 750}" ng-change="saveTime(u.userID, t.timeslotID)"></textarea>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <!-- Submit Button -->
+                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit </button>
                                     </div>
                                 </td>
                             </tr>
