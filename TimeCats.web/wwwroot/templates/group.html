@@ -218,6 +218,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- beginning of empty start row -->
                             <tr class="row no-gutters pt-1" style="border-top: 1px lightgray solid;" ng-if="isUser(u.userID)">
                                 <td class="col col-md-4 col-lg pr-1 container">
                                     <div class="row d-lg-none">
@@ -281,7 +282,9 @@
                                     </div>
                                 </td>
                             </tr>
-
+                            <!-- end of first entry row -->
+                            
+                            <!-- rows that are filled in already -->
                             <tr ng-repeat="t in u.timecards | orderObjectBy :'timeslotID':true" class="row no-gutters pt-1" style="border-top: 1px lightgray solid;">
                                 <td class="col col-md-4 col-lg pr-1 container">
                                     <div class="row d-lg-none">
@@ -347,6 +350,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            <!-- end of rows already filled in -->
                         </tbody>
                     </table>
                 </div>
