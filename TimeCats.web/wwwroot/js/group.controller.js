@@ -322,11 +322,13 @@
          * @param {*} userID 
          * @param {*} timeslotID 
          */
-        $scope.submitTime = function(userID, timeslotID, timeIn, timeOut){
+        $scope.submitTime = function(userID, timeIn, timeOut, description){
             try{
-                if(userID == null || timeslotID == null || timeIn == '' || timeOut == ''){
+                if(userID == null || timeIn == null || timeOut == null || description == null){
+                    console.log('Bad uID: ' + userID  + ' IN: ' + timeIn + ' Out: ' + timeOut + ' des: ' + description)
                     toastr["error"]("Please make sure all info is filled in before submitting")
                 } else {
+                    console.log('Good uID: ' + userID + ' tsID' + timeslotID + ' IN: ' + timeIn + ' Out: ' + timeOut + ' des: ' + description)
                     toastr['success']('You got all the info in. yay')
                 }
 
