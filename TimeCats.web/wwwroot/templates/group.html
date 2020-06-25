@@ -225,7 +225,7 @@
                                         <span class="col-2 pr-0 text-right">In</span>
                                         <div class="input-group date timeslot col mb-1 pl-1" id="datetimepicker-blank-{{u.userID}}-in" data-target-input="nearest">
                                             <input class="full-width form-control datetimepicker-input py-0 px-1 date-text" type="text" data-target="#datetimepicker-blank-{{u.userID}}-in" ng-model="u.blank.timeIn"
-                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" />
+                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'submitTime'}" ng-change="createTimeFromBlank(u.userID)" />
                                             <div class="input-group-append" data-target="#datetimepicker-blank-{{u.userID}}-in" data-toggle="datetimepicker">
                                                 <div class="input-group-text px-2 py-1"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -235,7 +235,7 @@
                                         <span class="col-2 pr-0 text-right">Out</span>
                                         <div class="input-group date timeslot col mb-1 pl-1" id="datetimepicker-blank-{{u.userID}}-out" data-target-input="nearest">
                                             <input class="full-width form-control datetimepicker-input py-0 px-1 date-text" type="text" data-target="#datetimepicker-blank-{{u.userID}}-out" ng-model="u.blank.timeOut"
-                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'blur', debounce: 750}"/>
+                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'submitTime'}"/>
                                             <div class="input-group-append" data-target="#datetimepicker-blank-{{u.userID}}-out" data-toggle="datetimepicker">
                                                 <div class="input-group-text px-2 py-1"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -244,7 +244,7 @@
                                     <div class="d-none d-lg-block">
                                         <div class="input-group date timeslot col mb-1 pl-1 pr-0" id="datetimepicker-blank-{{u.userID}}-in-lg" data-target-input="nearest">
                                             <input class="full-width form-control datetimepicker-input py-0 px-1 date-text" type="text" data-target="#datetimepicker-blank-{{u.userID}}-in-lg" ng-model="u.blank.timeIn"
-                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" />
+                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'submitTime'}" ng-change="createTimeFromBlank(u.userID)" />
                                             <div class="input-group-append" data-target="#datetimepicker-blank-{{u.userID}}-in-lg" data-toggle="datetimepicker">
                                                 <div class="input-group-text px-2 py-1"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -255,7 +255,7 @@
                                     <div>
                                         <div class="input-group date timeslot col mb-1 pl-0 pr-1" id="datetimepicker-blank-{{u.userID}}-out-lg" data-target-input="nearest">
                                             <input class="full-width form-control datetimepicker-input py-0 px-1 date-text" type="text" data-target="#datetimepicker-blank-{{u.userID}}-out-lg" ng-model="u.blank.timeOut"
-                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: 'blur', debounce: 750}"/>
+                                                   ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-model-options="{updateOn: submitTime}"/>
                                             <div class="input-group-append" data-target="#datetimepicker-blank-{{u.userID}}-out-lg" data-toggle="datetimepicker">
                                                 <div class="input-group-text px-2 py-1"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -264,7 +264,7 @@
                                 </td>
                                 <td class="col pr-1 d-none d-sm-table-cell col-lg-6">
                                     <textarea class="full-width form-control date-text description-textarea" ng-model="u.blank.description" ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))"
-                                              ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description This"></textarea>
+                                              ng-model-options="{updateOn: 'submitTime'}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description This"></textarea>
                                 </td>
                                 <td class="pr-1 hours-col" style="position:relative;">
                                 </td>
@@ -272,13 +272,13 @@
                                     <div class="row">
                                         <span class="col-2 pr-0 text-right">Desc&nbsp;</span>
                                         <textarea class="full-width form-control date-text description-textarea col" ng-model="u.blank.description" ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))"
-                                                  ng-model-options="{updateOn: 'blur', debounce: 750}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description"></textarea>
+                                                  ng-model-options="{updateOn: 'submitTime'}" ng-change="createTimeFromBlank(u.userID)" placeholder="Description"></textarea>
                                     </div>
                                 </td>
                                 <td>
                                     <div>
                                         <!-- Submit Button -->
-                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit 1</button>
+                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit</button>
                                     </div>
                                 </td>
                             </tr>
@@ -341,12 +341,6 @@
                                         <span class="col-2 pr-0 text-right">Desc&nbsp;</span>
                                         <textarea class="full-width form-control date-text description-textarea col" ng-model="t.description" ng-readonly="!isUser(u.userID)" placeholder="Description"
                                                   ng-model-options="{debounce: 750}" ng-change="saveTime(u.userID, t.timeslotID)"></textarea>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <!-- Submit Button -->
-                                        <button ng-readonly="!isUser(u.userID) || (!u.isActive && !($parent.user.type === 'A' || $parent.user.type === 'I'))" ng-click="submitTime(u.userID, t.timeslotID, t.timeIn, t.timeOut)">Submit </button>
                                     </div>
                                 </td>
                             </tr>
