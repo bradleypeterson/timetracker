@@ -3,43 +3,86 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TimeCats.Services;
 
 namespace TimeCats.Models
 {
     
     public class DBHelper
     {
-        private static TimeTrackerContext _TimeTrackerContext { get; set; }
-        public DBHelper()
+        private static TimeTrackerContext _context { get; set; }
+        public DBHelper(TimeTrackerContext context)
         {
-            
+            _context = context;
         }
 
         public static List<Dashboard> GetDashboard(int userID)
         {
             var dashboard = new List<Dashboard>();
-
-            dashboard.Add(new Dashboard
-            {
-                groupID = 1,
-                groupName = "Super Duper Group Thing",
-                projectID = 1,
-                projectName = "Super Project Name",
-                courseID = 1,
-                courseName = "Course2345",
-                instructorID = 1,
-                instructorName = "Instructor Man!"
-                
+            return _context.Groups
+                .Include(g => g.Project)
+                .Include(g => g.UserGroups)
+                .ThenInclude(ug => ug.User)
+                .ThenInclude(u => u.timecards)
+                .FirstOrDefault(u => u.userID = userID);
             
+
+            foreach(Group test in _context.Groups){
+
+            
+                dashboard.Add(new Dashboard
+                {
+                    groupID = test.groupID,
+                    groupName = test.groupName,
+                    projectID = test.projectID,
+                    projectName = test.Project.projectName,
+                    courseID = test.Project.CourseID,
+                    courseName = test.Project.Course.courseName,
+                    instructorID = test.Project.Course.InstructorId,
+                    instructorName = test.Project.Course.instructorName
+
+                });            
+            
+            }
+            
+
+            dashboard.Add(new Dashboard{
+                groupID = 69,
+                groupName = "Bull Honkey",
+                projectID = 2,
+                projectName = "This is dumb, why won't it work",
+                courseID = 10,
+                courseName = "Worst class ever, like ever ever",
+                instructorID = 420,
+                instructorName = "Snoop Dogg"
             });
-
-            
+            dashboard.Add(new Dashboard{
+                groupID = 420,
+                groupName = "Why me",
+                projectID = 5,
+                projectName = "I'm over this",
+                courseID = 420,
+                courseName = "Making you 2nd guess your degree",
+                instructorID = 3,
+                instructorName = "Jesus"
+            });
 
             return dashboard;
         }
 
 
+        public static Group GetGroup(int groupID)
+        {
+            return _context.Groups
+                .Include(g => g.Project)
+                .Include(g => g.UserGroups)
+                .ThenInclude(ug => ug.User)
+                .ThenInclude(u => u.timecards)
+                .FirstOrDefault(g => g.groupID == groupID);
+        }
 
+// Everything below here we can just consider to be trash leftover from the people before
+// but will keep until it's total worthlessness has been proven
 
         //    var group = new Group();
         //    group.users = new List<User>();
