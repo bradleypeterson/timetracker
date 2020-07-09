@@ -14,22 +14,25 @@ namespace TimeCats.Models
         public DBHelper(TimeTrackerContext context)
         {
             _context = context;
+            GetGroups();   
         }
 
         public static List<Dashboard> GetDashboard(int userID)
         {
             var dashboard = new List<Dashboard>();
-            return _context.Groups
-                .Include(g => g.Project)
-                .Include(g => g.UserGroups)
-                .ThenInclude(ug => ug.User)
-                .ThenInclude(u => u.timecards)
-                .FirstOrDefault(u => u.userID = userID);
-            
+           
+           //this isn't working
+            // return _context.Groups
+            //     .Include(g => g.Project)
+            //     .Include(g => g.UserGroups)
+            //     .ThenInclude(ug => ug.User)
+            //     .ThenInclude(u => u.timecards)
+            //     .FirstOrDefault(u => u.userID = userID);
+
+
 
             foreach(Group test in _context.Groups){
 
-            
                 dashboard.Add(new Dashboard
                 {
                     groupID = test.groupID,
@@ -70,7 +73,14 @@ namespace TimeCats.Models
             return dashboard;
         }
 
+        //this seems logical...? No errors so far and this is how others are
+        //pulling in all the info
+        public IEnumerable<Group> GetGroups()
+        {
+            return _context.Groups;
+        }
 
+        //we maybe might not need this? idk, i hate this
         public static Group GetGroup(int groupID)
         {
             return _context.Groups
