@@ -10,42 +10,43 @@ namespace TimeCats.Models
     
     public class DBHelper
     {
-        private static TimeTrackerContext _context { get; set; }
+        private readonly TimeTrackerContext _context;
         public DBHelper(TimeTrackerContext context)
         {
             _context = context;
             GetGroups();   
         }
 
-        public static List<Dashboard> GetDashboard(int userID)
+        public List<Dashboard> GetDashboard(int userID)
         {
             var dashboard = new List<Dashboard>();
            
            //this isn't working
-            // return _context.Groups
-            //     .Include(g => g.Project)
-            //     .Include(g => g.UserGroups)
-            //     .ThenInclude(ug => ug.User)
-            //     .ThenInclude(u => u.timecards)
-            //     .FirstOrDefault(u => u.userID = userID);
+           //  return _context.Groups
+           //      .Include(g => g.Project)
+           //      .Include(g => g.UserGroups)
+           //      .ThenInclude(ug => ug.User)
+           //      .ThenInclude(u => u.timecards)
+           //      .FirstOrDefault(u => u.userID = userID);
 
 
 
             foreach(Group test in _context.Groups){
-
-                dashboard.Add(new Dashboard
+                if (test.Project != null)
                 {
-                    groupID = test.groupID,
-                    groupName = test.groupName,
-                    projectID = test.projectID,
-                    projectName = test.Project.projectName,
-                    courseID = test.Project.CourseID,
-                    courseName = test.Project.Course.courseName,
-                    instructorID = test.Project.Course.InstructorId,
-                    instructorName = test.Project.Course.instructorName
+                    dashboard.Add(new Dashboard
+                    {
+                        groupID = test.groupID,
+                        groupName = test.groupName,
+                        projectID = test.projectID,
+                        projectName = test.Project.projectName,
+                        courseID = test.Project.CourseID,
+                        courseName = test.Project.Course.courseName,
+                        instructorID = test.Project.Course.InstructorId,
+                        instructorName = test.Project.Course.instructorName
 
-                });            
-            
+                    });
+                }
             }
             
 
@@ -81,7 +82,7 @@ namespace TimeCats.Models
         }
 
         //we maybe might not need this? idk, i hate this
-        public static Group GetGroup(int groupID)
+        public Group GetGroup(int groupID)
         {
             return _context.Groups
                 .Include(g => g.Project)

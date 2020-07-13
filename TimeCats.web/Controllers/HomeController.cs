@@ -24,6 +24,7 @@ namespace TimeCats.Controllers
         protected readonly ProjectService _projectService;
         protected readonly TimeService _timeService;
         protected readonly UserService _userService;
+        protected readonly DBHelper _DBHelper;
 
         public HomeController(IServiceProvider serviceProvider)
         {
@@ -34,6 +35,7 @@ namespace TimeCats.Controllers
             _projectService = serviceProvider.GetRequiredService<ProjectService>();
             _timeService = serviceProvider.GetRequiredService<TimeService>();
             _userService = serviceProvider.GetRequiredService<UserService>();
+            _DBHelper = serviceProvider.GetRequiredService<DBHelper>();
         }
 
         public IActionResult Error()

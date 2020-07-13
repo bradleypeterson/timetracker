@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TimeCats.Services;
+using TimeCats.Models;
 
 namespace TimeCats
 {
@@ -34,6 +35,7 @@ namespace TimeCats
             services.AddScoped<ProjectService>();
             services.AddScoped<TimeService>();
             services.AddScoped<UserService>();
+            services.AddScoped<DBHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
